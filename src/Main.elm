@@ -1,23 +1,16 @@
 module Main exposing (..)
---
 
 import Browser
 import Html exposing (Html, Attribute, div, input, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
-
-
 -- MAIN
-
 
 main =
   Browser.sandbox { init = init, update = update, view = view }
 
-
-
 -- MODEL
-
 
 type alias Model =
   { yearsMarried : String
@@ -29,10 +22,9 @@ type alias Model =
 init : Model
 init =
   { yearsMarried = "5"
-  , sarahSalary = "0"
-  , kyleSalary = "0"
+  , sarahSalary = ""
+  , kyleSalary = ""
   }
-
 
 -- UPDATE
 
