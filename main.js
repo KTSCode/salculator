@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.L.A === region.Q.A)
+	if (region.N.D === region.S.D)
 	{
-		return 'on line ' + region.L.A;
+		return 'on line ' + region.N.D;
 	}
-	return 'on lines ' + region.L.A + ' through ' + region.Q.A;
+	return 'on lines ' + region.N.D + ' through ' + region.S.D;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aw,
+		impl.ay,
+		impl.aG,
 		impl.aE,
-		impl.aC,
 		function() { return function() {} }
 	);
 });
@@ -2720,8 +2720,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		o: func(record.o),
-		M: record.M,
-		J: record.J
+		O: record.O,
+		L: record.L
 	}
 });
 
@@ -2990,10 +2990,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.o;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.M;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.O;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.J) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.L) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3943,11 +3943,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aw,
+		impl.ay,
+		impl.aG,
 		impl.aE,
-		impl.aC,
 		function(sendToApp, initialModel) {
-			var view = impl.aF;
+			var view = impl.aH;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3979,12 +3979,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aw,
+		impl.ay,
+		impl.aG,
 		impl.aE,
-		impl.aC,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.K && impl.K(sendToApp)
-			var view = impl.aF;
+			var divertHrefToApp = impl.M && impl.M(sendToApp)
+			var view = impl.aH;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3992,12 +3992,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.ap);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.ar);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aD) && (_VirtualDom_doc.title = title = doc.aD);
+				(title !== doc.aF) && (_VirtualDom_doc.title = title = doc.aF);
 			});
 		}
 	);
@@ -4053,12 +4053,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.ay;
-	var onUrlRequest = impl.az;
+	var onUrlChange = impl.aA;
+	var onUrlRequest = impl.aB;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		K: function(sendToApp)
+		M: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4074,9 +4074,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.ac === next.ac
-							&& curr.U === next.U
-							&& curr._.a === next._.a
+							&& curr.ae === next.ae
+							&& curr.W === next.W
+							&& curr.ab.a === next.ab.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4084,13 +4084,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		aw: function(flags)
+		ay: function(flags)
 		{
-			return A3(impl.aw, flags, _Browser_getUrl(), key);
+			return A3(impl.ay, flags, _Browser_getUrl(), key);
 		},
-		aF: impl.aF,
-		aE: impl.aE,
-		aC: impl.aC
+		aH: impl.aH,
+		aG: impl.aG,
+		aE: impl.aE
 	});
 }
 
@@ -4156,17 +4156,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { au: 'hidden', aq: 'visibilitychange' }
+		? { aw: 'hidden', as: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { au: 'mozHidden', aq: 'mozvisibilitychange' }
+		? { aw: 'mozHidden', as: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { au: 'msHidden', aq: 'msvisibilitychange' }
+		? { aw: 'msHidden', as: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { au: 'webkitHidden', aq: 'webkitvisibilitychange' }
-		: { au: 'hidden', aq: 'visibilitychange' };
+		? { aw: 'webkitHidden', as: 'webkitvisibilitychange' }
+		: { aw: 'hidden', as: 'visibilitychange' };
 }
 
 
@@ -4247,12 +4247,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		ag: _Browser_getScene(),
-		aj: {
-			al: _Browser_window.pageXOffset,
-			am: _Browser_window.pageYOffset,
-			ak: _Browser_doc.documentElement.clientWidth,
-			T: _Browser_doc.documentElement.clientHeight
+		ai: _Browser_getScene(),
+		al: {
+			an: _Browser_window.pageXOffset,
+			ao: _Browser_window.pageYOffset,
+			am: _Browser_doc.documentElement.clientWidth,
+			V: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4262,8 +4262,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		ak: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		T: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		am: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		V: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4286,15 +4286,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			ag: {
-				ak: node.scrollWidth,
-				T: node.scrollHeight
+			ai: {
+				am: node.scrollWidth,
+				V: node.scrollHeight
 			},
-			aj: {
-				al: node.scrollLeft,
-				am: node.scrollTop,
-				ak: node.clientWidth,
-				T: node.clientHeight
+			al: {
+				an: node.scrollLeft,
+				ao: node.scrollTop,
+				am: node.clientWidth,
+				V: node.clientHeight
 			}
 		};
 	});
@@ -4324,18 +4324,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			ag: _Browser_getScene(),
-			aj: {
-				al: x,
-				am: y,
-				ak: _Browser_doc.documentElement.clientWidth,
-				T: _Browser_doc.documentElement.clientHeight
+			ai: _Browser_getScene(),
+			al: {
+				an: x,
+				ao: y,
+				am: _Browser_doc.documentElement.clientWidth,
+				V: _Browser_doc.documentElement.clientHeight
 			},
-			as: {
-				al: x + rect.left,
-				am: y + rect.top,
-				ak: rect.width,
-				T: rect.height
+			au: {
+				an: x + rect.left,
+				ao: y + rect.top,
+				am: rect.width,
+				V: rect.height
 			}
 		};
 	});
@@ -4370,7 +4370,7 @@ function _Browser_load(url)
 		}
 	}));
 }
-var $author$project$Main$init = {z: '', B: '', G: '5'};
+var $author$project$Main$init = {w: '4', x: '', y: '6', z: '', I: '5'};
 var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
@@ -4875,7 +4875,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {S: fragment, U: host, Y: path, _: port_, ac: protocol, ad: query};
+		return {U: fragment, W: host, _: path, ab: port_, ae: protocol, af: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5160,19 +5160,19 @@ var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $elm$browser$Browser$sandbox = function (impl) {
 	return _Browser_element(
 		{
-			aw: function (_v0) {
-				return _Utils_Tuple2(impl.aw, $elm$core$Platform$Cmd$none);
+			ay: function (_v0) {
+				return _Utils_Tuple2(impl.ay, $elm$core$Platform$Cmd$none);
 			},
-			aC: function (_v1) {
+			aE: function (_v1) {
 				return $elm$core$Platform$Sub$none;
 			},
-			aE: F2(
+			aG: F2(
 				function (msg, model) {
 					return _Utils_Tuple2(
-						A2(impl.aE, msg, model),
+						A2(impl.aG, msg, model),
 						$elm$core$Platform$Cmd$none);
 				}),
-			aF: impl.aF
+			aH: impl.aH
 		});
 };
 var $author$project$Main$update = F2(
@@ -5182,20 +5182,36 @@ var $author$project$Main$update = F2(
 				var val = msg.a;
 				return _Utils_update(
 					model,
-					{G: val});
+					{I: val});
 			case 1:
 				var val = msg.a;
 				return _Utils_update(
 					model,
-					{B: val});
+					{z: val});
+			case 2:
+				var val = msg.a;
+				return _Utils_update(
+					model,
+					{y: val});
+			case 3:
+				var val = msg.a;
+				return _Utils_update(
+					model,
+					{x: val});
 			default:
 				var val = msg.a;
 				return _Utils_update(
 					model,
-					{z: val});
+					{w: val});
 		}
 	});
+var $author$project$Main$ChangeKyleCont = function (a) {
+	return {$: 4, a: a};
+};
 var $author$project$Main$ChangeKyleSalary = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Main$ChangeSarahCont = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Main$ChangeSarahSalary = function (a) {
@@ -5206,6 +5222,10 @@ var $author$project$Main$ChangeYearsMarried = function (a) {
 };
 var $elm$html$Html$br = _VirtualDom_node('br');
 var $elm$core$String$fromFloat = _String_fromNumber;
+var $author$project$Main$reduceByPercent = F2(
+	function (toReduce, percent) {
+		return toReduce - (toReduce * (percent / 100));
+	});
 var $elm$core$String$toFloat = _String_toFloat;
 var $elm$core$Maybe$withDefault = F2(
 	function (_default, maybe) {
@@ -5222,10 +5242,25 @@ var $author$project$Main$toFloatDef = function (str) {
 		0,
 		$elm$core$String$toFloat(str));
 };
-var $author$project$Main$calculateTithe = F3(
-	function (yearsMarried, sarahSalary, kyleSalary) {
+var $author$project$Main$calculateTithe = F5(
+	function (yearsMarried, sarahSalary, sarahCont, kyleSalary, kyleCont) {
 		return $elm$core$String$fromFloat(
-			(($author$project$Main$toFloatDef(sarahSalary) + $author$project$Main$toFloatDef(kyleSalary)) / 12) / ($author$project$Main$toFloatDef(yearsMarried) + 10));
+			function (x) {
+				return x * (($author$project$Main$toFloatDef(yearsMarried) + 10) / 100);
+			}(
+				function (x) {
+					return x / 12;
+				}(
+					function (x) {
+						return x + A2(
+							$author$project$Main$reduceByPercent,
+							$author$project$Main$toFloatDef(kyleSalary),
+							$author$project$Main$toFloatDef(kyleCont));
+					}(
+						A2(
+							$author$project$Main$reduceByPercent,
+							$author$project$Main$toFloatDef(sarahSalary),
+							$author$project$Main$toFloatDef(sarahCont))))));
 	});
 var $elm$core$String$concat = function (strings) {
 	return A2($elm$core$String$join, '', strings);
@@ -5306,7 +5341,7 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$placeholder('Years Married'),
-						$elm$html$Html$Attributes$value(model.G),
+						$elm$html$Html$Attributes$value(model.I),
 						$elm$html$Html$Events$onInput($author$project$Main$ChangeYearsMarried)
 					]),
 				_List_Nil),
@@ -5324,8 +5359,26 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$placeholder('Sarah Salary'),
-						$elm$html$Html$Attributes$value(model.B),
+						$elm$html$Html$Attributes$value(model.z),
 						$elm$html$Html$Events$onInput($author$project$Main$ChangeSarahSalary)
+					]),
+				_List_Nil),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Sarah\'s Contribution %')
+					])),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$input,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$placeholder('Sarah Cont'),
+						$elm$html$Html$Attributes$value(model.y),
+						$elm$html$Html$Events$onInput($author$project$Main$ChangeSarahCont)
 					]),
 				_List_Nil),
 				A2($elm$html$Html$br, _List_Nil, _List_Nil),
@@ -5342,11 +5395,36 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$placeholder('Kyle Salary'),
-						$elm$html$Html$Attributes$value(model.z),
+						$elm$html$Html$Attributes$value(model.x),
 						$elm$html$Html$Events$onInput($author$project$Main$ChangeKyleSalary)
 					]),
 				_List_Nil),
 				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Kyle\'s Contribution %')
+					])),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$input,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$placeholder('Kyle Cont'),
+						$elm$html$Html$Attributes$value(model.w),
+						$elm$html$Html$Events$onInput($author$project$Main$ChangeKyleCont)
+					]),
+				_List_Nil),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('------------------------------')
+					])),
 				A2($elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$label,
@@ -5358,12 +5436,26 @@ var $author$project$Main$view = function (model) {
 							_List_fromArray(
 								[
 									'Monthly Tithe: $',
-									A3($author$project$Main$calculateTithe, model.G, model.B, model.z)
+									A5($author$project$Main$calculateTithe, '0', model.z, model.y, model.x, model.w)
+								])))
+					])),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$concat(
+							_List_fromArray(
+								[
+									'Monthly Tithe + Giving: $',
+									A5($author$project$Main$calculateTithe, model.I, model.z, model.y, model.x, model.w)
 								])))
 					]))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$sandbox(
-	{aw: $author$project$Main$init, aE: $author$project$Main$update, aF: $author$project$Main$view});
+	{ay: $author$project$Main$init, aG: $author$project$Main$update, aH: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
