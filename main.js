@@ -4370,7 +4370,7 @@ function _Browser_load(url)
 		}
 	}));
 }
-var $author$project$Main$init = {z: '0', B: '0', G: '5'};
+var $author$project$Main$init = {z: '', B: '', G: '5'};
 var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
@@ -5204,6 +5204,7 @@ var $author$project$Main$ChangeSarahSalary = function (a) {
 var $author$project$Main$ChangeYearsMarried = function (a) {
 	return {$: 0, a: a};
 };
+var $elm$html$Html$br = _VirtualDom_node('br');
 var $elm$core$String$fromFloat = _String_fromNumber;
 var $elm$core$String$toFloat = _String_toFloat;
 var $elm$core$Maybe$withDefault = F2(
@@ -5226,8 +5227,13 @@ var $author$project$Main$calculateTithe = F3(
 		return $elm$core$String$fromFloat(
 			(($author$project$Main$toFloatDef(sarahSalary) + $author$project$Main$toFloatDef(kyleSalary)) / 12) / ($author$project$Main$toFloatDef(yearsMarried) + 10));
 	});
-var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$core$String$concat = function (strings) {
+	return A2($elm$core$String$join, '', strings);
+};
+var $elm$html$Html$form = _VirtualDom_node('form');
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
@@ -5276,10 +5282,25 @@ var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$view = function (model) {
 	return A2(
-		$elm$html$Html$div,
+		$elm$html$Html$form,
 		_List_Nil,
 		_List_fromArray(
 			[
+				A2(
+				$elm$html$Html$h1,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Sarah\'s Salculator:')
+					])),
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Number of Years Married')
+					])),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$input,
 				_List_fromArray(
@@ -5289,6 +5310,15 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$Events$onInput($author$project$Main$ChangeYearsMarried)
 					]),
 				_List_Nil),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Sarah\'s Salary')
+					])),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$input,
 				_List_fromArray(
@@ -5298,6 +5328,15 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$Events$onInput($author$project$Main$ChangeSarahSalary)
 					]),
 				_List_Nil),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Kyle\'s Salary')
+					])),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$input,
 				_List_fromArray(
@@ -5307,13 +5346,20 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$Events$onInput($author$project$Main$ChangeKyleSalary)
 					]),
 				_List_Nil),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
-				$elm$html$Html$div,
+				$elm$html$Html$label,
 				_List_Nil,
 				_List_fromArray(
 					[
 						$elm$html$Html$text(
-						A3($author$project$Main$calculateTithe, model.G, model.B, model.z))
+						$elm$core$String$concat(
+							_List_fromArray(
+								[
+									'Monthly Tithe: $',
+									A3($author$project$Main$calculateTithe, model.G, model.B, model.z)
+								])))
 					]))
 			]));
 };

@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, Attribute, div, input, text)
+import Html exposing ( Attribute, Html, br, div, h1, input, label, text )
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
@@ -62,9 +62,20 @@ calculateTithe yearsMarried sarahSalary kyleSalary =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ input [ placeholder "Years Married", value model.yearsMarried, onInput ChangeYearsMarried ] []
+  Html.form []
+    [ h1 [] [ text "Sarah's Salculator:" ]
+      , label [] [ text "Number of Years Married" ]
+      , br [] []
+      ,input [ placeholder "Years Married", value model.yearsMarried, onInput ChangeYearsMarried ] []
+      , br [] []
+      , label [] [ text "Sarah's Salary" ]
+      , br [] []
       , input [ placeholder "Sarah Salary", value model.sarahSalary, onInput ChangeSarahSalary ] []
+      , br [] []
+      , label [] [ text "Kyle's Salary" ]
+      , br [] []
       , input [ placeholder "Kyle Salary", value model.kyleSalary, onInput ChangeKyleSalary ] []
-    , div [] [ text (calculateTithe model.yearsMarried model.sarahSalary model.kyleSalary) ]
+      , br [] []
+      , br [] []
+      , label [] [ text (String.concat [ "Monthly Tithe: $" , (calculateTithe model.yearsMarried model.sarahSalary model.kyleSalary) ] ) ]
     ]
