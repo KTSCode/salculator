@@ -69,6 +69,7 @@ reduceByPercent : Float -> Float -> Float
 reduceByPercent toReduce percent =
   (toReduce - ((toReduce * (percent / 100))))
 
+--monthlySalary : String 
 calculateTithe : String -> String -> String -> String -> String -> String
 calculateTithe yearsMarried sarahSalary sarahCont kyleSalary kyleCont =
   (reduceByPercent (toFloatDef sarahSalary) (toFloatDef sarahCont))
