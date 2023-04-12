@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.N.D === region.S.D)
+	if (region.a9.aA === region.br.aA)
 	{
-		return 'on line ' + region.N.D;
+		return 'on line ' + region.a9.aA;
 	}
-	return 'on lines ' + region.N.D + ' through ' + region.S.D;
+	return 'on lines ' + region.a9.aA + ' through ' + region.br.aA;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ay,
-		impl.aG,
-		impl.aE,
+		impl.ce,
+		impl.cr,
+		impl.cp,
 		function() { return function() {} }
 	);
 });
@@ -2719,9 +2719,9 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		o: func(record.o),
-		O: record.O,
-		L: record.L
+		F: func(record.F),
+		ba: record.ba,
+		a7: record.a7
 	}
 });
 
@@ -2989,11 +2989,11 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.o;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.O;
+		var message = !tag ? value : tag < 3 ? value.a : value.F;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.ba;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.L) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.a7) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3943,11 +3943,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ay,
-		impl.aG,
-		impl.aE,
+		impl.ce,
+		impl.cr,
+		impl.cp,
 		function(sendToApp, initialModel) {
-			var view = impl.aH;
+			var view = impl.ct;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3979,12 +3979,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ay,
-		impl.aG,
-		impl.aE,
+		impl.ce,
+		impl.cr,
+		impl.cp,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.M && impl.M(sendToApp)
-			var view = impl.aH;
+			var divertHrefToApp = impl.a8 && impl.a8(sendToApp)
+			var view = impl.ct;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3992,12 +3992,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.ar);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.b4);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aF) && (_VirtualDom_doc.title = title = doc.aF);
+				(title !== doc.cq) && (_VirtualDom_doc.title = title = doc.cq);
 			});
 		}
 	);
@@ -4053,12 +4053,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.aA;
-	var onUrlRequest = impl.aB;
+	var onUrlChange = impl.ci;
+	var onUrlRequest = impl.cj;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		M: function(sendToApp)
+		a8: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4074,9 +4074,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.ae === next.ae
-							&& curr.W === next.W
-							&& curr.ab.a === next.ab.a
+							&& curr.bL === next.bL
+							&& curr.bx === next.bx
+							&& curr.bI.a === next.bI.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4084,13 +4084,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		ay: function(flags)
+		ce: function(flags)
 		{
-			return A3(impl.ay, flags, _Browser_getUrl(), key);
+			return A3(impl.ce, flags, _Browser_getUrl(), key);
 		},
-		aH: impl.aH,
-		aG: impl.aG,
-		aE: impl.aE
+		ct: impl.ct,
+		cr: impl.cr,
+		cp: impl.cp
 	});
 }
 
@@ -4156,17 +4156,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { aw: 'hidden', as: 'visibilitychange' }
+		? { cb: 'hidden', b5: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { aw: 'mozHidden', as: 'mozvisibilitychange' }
+		? { cb: 'mozHidden', b5: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { aw: 'msHidden', as: 'msvisibilitychange' }
+		? { cb: 'msHidden', b5: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { aw: 'webkitHidden', as: 'webkitvisibilitychange' }
-		: { aw: 'hidden', as: 'visibilitychange' };
+		? { cb: 'webkitHidden', b5: 'webkitvisibilitychange' }
+		: { cb: 'hidden', b5: 'visibilitychange' };
 }
 
 
@@ -4247,12 +4247,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		ai: _Browser_getScene(),
-		al: {
-			an: _Browser_window.pageXOffset,
-			ao: _Browser_window.pageYOffset,
-			am: _Browser_doc.documentElement.clientWidth,
-			V: _Browser_doc.documentElement.clientHeight
+		bQ: _Browser_getScene(),
+		bX: {
+			bZ: _Browser_window.pageXOffset,
+			b_: _Browser_window.pageYOffset,
+			bY: _Browser_doc.documentElement.clientWidth,
+			bw: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4262,8 +4262,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		am: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		V: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		bY: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		bw: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4286,15 +4286,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			ai: {
-				am: node.scrollWidth,
-				V: node.scrollHeight
+			bQ: {
+				bY: node.scrollWidth,
+				bw: node.scrollHeight
 			},
-			al: {
-				an: node.scrollLeft,
-				ao: node.scrollTop,
-				am: node.clientWidth,
-				V: node.clientHeight
+			bX: {
+				bZ: node.scrollLeft,
+				b_: node.scrollTop,
+				bY: node.clientWidth,
+				bw: node.clientHeight
 			}
 		};
 	});
@@ -4324,18 +4324,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			ai: _Browser_getScene(),
-			al: {
-				an: x,
-				ao: y,
-				am: _Browser_doc.documentElement.clientWidth,
-				V: _Browser_doc.documentElement.clientHeight
+			bQ: _Browser_getScene(),
+			bX: {
+				bZ: x,
+				b_: y,
+				bY: _Browser_doc.documentElement.clientWidth,
+				bw: _Browser_doc.documentElement.clientHeight
 			},
-			au: {
-				an: x + rect.left,
-				ao: y + rect.top,
-				am: rect.width,
-				V: rect.height
+			b9: {
+				bZ: x + rect.left,
+				b_: y + rect.top,
+				bY: rect.width,
+				bw: rect.height
 			}
 		};
 	});
@@ -4370,7 +4370,44 @@ function _Browser_load(url)
 		}
 	}));
 }
-var $author$project$Main$init = {w: '4', x: '', y: '6', z: '', I: '5'};
+
+
+
+var _Bitwise_and = F2(function(a, b)
+{
+	return a & b;
+});
+
+var _Bitwise_or = F2(function(a, b)
+{
+	return a | b;
+});
+
+var _Bitwise_xor = F2(function(a, b)
+{
+	return a ^ b;
+});
+
+function _Bitwise_complement(a)
+{
+	return ~a;
+};
+
+var _Bitwise_shiftLeftBy = F2(function(offset, a)
+{
+	return a << offset;
+});
+
+var _Bitwise_shiftRightBy = F2(function(offset, a)
+{
+	return a >> offset;
+});
+
+var _Bitwise_shiftRightZfBy = F2(function(offset, a)
+{
+	return a >>> offset;
+});
+var $author$project$Main$init = {ae: '4', M: '', ak: '6', R: '', aK: '5'};
 var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
@@ -4777,25 +4814,25 @@ var $elm$core$Array$treeFromBuilder = F2(
 	});
 var $elm$core$Array$builderToArray = F2(
 	function (reverseNodeList, builder) {
-		if (!builder.a) {
+		if (!builder.g) {
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.c),
+				$elm$core$Elm$JsArray$length(builder.i),
 				$elm$core$Array$shiftStep,
 				$elm$core$Elm$JsArray$empty,
-				builder.c);
+				builder.i);
 		} else {
-			var treeLen = builder.a * $elm$core$Array$branchFactor;
+			var treeLen = builder.g * $elm$core$Array$branchFactor;
 			var depth = $elm$core$Basics$floor(
 				A2($elm$core$Basics$logBase, $elm$core$Array$branchFactor, treeLen - 1));
-			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.d) : builder.d;
-			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.a);
+			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.j) : builder.j;
+			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.g);
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.c) + treeLen,
+				$elm$core$Elm$JsArray$length(builder.i) + treeLen,
 				A2($elm$core$Basics$max, 5, depth * $elm$core$Array$shiftStep),
 				tree,
-				builder.c);
+				builder.i);
 		}
 	});
 var $elm$core$Basics$idiv = _Basics_idiv;
@@ -4808,7 +4845,7 @@ var $elm$core$Array$initializeHelp = F5(
 				return A2(
 					$elm$core$Array$builderToArray,
 					false,
-					{d: nodeList, a: (len / $elm$core$Array$branchFactor) | 0, c: tail});
+					{j: nodeList, g: (len / $elm$core$Array$branchFactor) | 0, i: tail});
 			} else {
 				var leaf = $elm$core$Array$Leaf(
 					A3($elm$core$Elm$JsArray$initialize, $elm$core$Array$branchFactor, fromIndex, fn));
@@ -4875,7 +4912,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {U: fragment, W: host, _: path, ab: port_, ae: protocol, af: query};
+		return {bv: fragment, bx: host, bG: path, bI: port_, bL: protocol, bM: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5160,20 +5197,45 @@ var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $elm$browser$Browser$sandbox = function (impl) {
 	return _Browser_element(
 		{
-			ay: function (_v0) {
-				return _Utils_Tuple2(impl.ay, $elm$core$Platform$Cmd$none);
+			ce: function (_v0) {
+				return _Utils_Tuple2(impl.ce, $elm$core$Platform$Cmd$none);
 			},
-			aE: function (_v1) {
+			cp: function (_v1) {
 				return $elm$core$Platform$Sub$none;
 			},
-			aG: F2(
+			cr: F2(
 				function (msg, model) {
 					return _Utils_Tuple2(
-						A2(impl.aG, msg, model),
+						A2(impl.cr, msg, model),
 						$elm$core$Platform$Cmd$none);
 				}),
-			aH: impl.aH
+			ct: impl.ct
 		});
+};
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$core$String$fromList = _String_fromList;
+var $elm$core$String$foldr = _String_foldr;
+var $elm$core$String$toList = function (string) {
+	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
+};
+var $author$project$Main$filterInput = function (str) {
+	return $elm$core$String$fromList(
+		A2(
+			$elm$core$List$filter,
+			function (c) {
+				return $elm$core$Char$isDigit(c) || (c === '.');
+			},
+			$elm$core$String$toList(str)));
 };
 var $author$project$Main$update = F2(
 	function (msg, model) {
@@ -5182,27 +5244,37 @@ var $author$project$Main$update = F2(
 				var val = msg.a;
 				return _Utils_update(
 					model,
-					{I: val});
+					{
+						aK: $author$project$Main$filterInput(val)
+					});
 			case 1:
 				var val = msg.a;
 				return _Utils_update(
 					model,
-					{z: val});
+					{
+						R: $author$project$Main$filterInput(val)
+					});
 			case 2:
 				var val = msg.a;
 				return _Utils_update(
 					model,
-					{y: val});
+					{
+						ak: $author$project$Main$filterInput(val)
+					});
 			case 3:
 				var val = msg.a;
 				return _Utils_update(
 					model,
-					{x: val});
+					{
+						M: $author$project$Main$filterInput(val)
+					});
 			default:
 				var val = msg.a;
 				return _Utils_update(
 					model,
-					{w: val});
+					{
+						ae: $author$project$Main$filterInput(val)
+					});
 		}
 	});
 var $author$project$Main$ChangeKyleCont = function (a) {
@@ -5220,8 +5292,6 @@ var $author$project$Main$ChangeSarahSalary = function (a) {
 var $author$project$Main$ChangeYearsMarried = function (a) {
 	return {$: 0, a: a};
 };
-var $elm$html$Html$br = _VirtualDom_node('br');
-var $elm$core$String$fromFloat = _String_fromNumber;
 var $author$project$Main$reduceByPercent = F2(
 	function (toReduce, percent) {
 		return toReduce - (toReduce * (percent / 100));
@@ -5244,31 +5314,24 @@ var $author$project$Main$toFloatDef = function (str) {
 };
 var $author$project$Main$calculateTithe = F5(
 	function (yearsMarried, sarahSalary, sarahCont, kyleSalary, kyleCont) {
-		return $elm$core$String$fromFloat(
+		return function (x) {
+			return x * (($author$project$Main$toFloatDef(yearsMarried) + 10) / 100);
+		}(
 			function (x) {
-				return x * (($author$project$Main$toFloatDef(yearsMarried) + 10) / 100);
+				return x / 12;
 			}(
-				function (x) {
-					return x / 12;
-				}(
-					function (x) {
-						return x + A2(
-							$author$project$Main$reduceByPercent,
-							$author$project$Main$toFloatDef(kyleSalary),
-							$author$project$Main$toFloatDef(kyleCont));
-					}(
-						A2(
-							$author$project$Main$reduceByPercent,
-							$author$project$Main$toFloatDef(sarahSalary),
-							$author$project$Main$toFloatDef(sarahCont))))));
+				A2(
+					$author$project$Main$reduceByPercent,
+					$author$project$Main$toFloatDef(kyleSalary),
+					$author$project$Main$toFloatDef(kyleCont)) + A2(
+					$author$project$Main$reduceByPercent,
+					$author$project$Main$toFloatDef(sarahSalary),
+					$author$project$Main$toFloatDef(sarahCont))));
 	});
-var $elm$core$String$concat = function (strings) {
-	return A2($elm$core$String$join, '', strings);
-};
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$form = _VirtualDom_node('form');
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$br = _VirtualDom_node('br');
 var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
@@ -5312,150 +5375,244 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			$elm$json$Json$Encode$string(string));
 	});
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$Main$formInput = F3(
+	function (ph, val, oi) {
+		return A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$input,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$placeholder(ph),
+							$elm$html$Html$Attributes$value(val),
+							$elm$html$Html$Events$onInput(oi),
+							A2($elm$html$Html$Attributes$style, 'backgroundColor', '#485460'),
+							A2($elm$html$Html$Attributes$style, 'color', '#ECF0F1'),
+							A2($elm$html$Html$Attributes$style, 'margin', '10px')
+						]),
+					_List_Nil),
+					A2($elm$html$Html$br, _List_Nil, _List_Nil),
+					A2($elm$html$Html$br, _List_Nil, _List_Nil)
+				]));
+	});
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$core$Basics$abs = function (n) {
+	return (n < 0) ? (-n) : n;
+};
+var $elm$core$String$fromFloat = _String_fromNumber;
+var $elm$core$String$cons = _String_cons;
+var $elm$core$String$fromChar = function (_char) {
+	return A2($elm$core$String$cons, _char, '');
+};
+var $elm$core$Bitwise$and = _Bitwise_and;
+var $elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
+var $elm$core$String$repeatHelp = F3(
+	function (n, chunk, result) {
+		return (n <= 0) ? result : A3(
+			$elm$core$String$repeatHelp,
+			n >> 1,
+			_Utils_ap(chunk, chunk),
+			(!(n & 1)) ? result : _Utils_ap(result, chunk));
+	});
+var $elm$core$String$repeat = F2(
+	function (n, chunk) {
+		return A3($elm$core$String$repeatHelp, n, chunk, '');
+	});
+var $elm$core$String$padLeft = F3(
+	function (n, _char, string) {
+		return _Utils_ap(
+			A2(
+				$elm$core$String$repeat,
+				n - $elm$core$String$length(string),
+				$elm$core$String$fromChar(_char)),
+			string);
+	});
+var $elm$core$Basics$round = _Basics_round;
+var $author$project$Main$formatCurrency = function (amount) {
+	return function (str) {
+		return (amount < 0) ? ('-' + str) : str;
+	}(
+		A3(
+			$elm$core$String$padLeft,
+			2,
+			'0',
+			function (str) {
+				return '$' + str;
+			}(
+				$elm$core$String$fromFloat(
+					function (x) {
+						return x / 100;
+					}(
+						$elm$core$Basics$round(
+							100 * $elm$core$Basics$abs(amount)))))));
+};
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$Main$labeledValue = F2(
+	function (label, value) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+					A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
+					A2($elm$html$Html$Attributes$style, 'align-items', 'center')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$label,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(label)
+						])),
+					A2($elm$html$Html$br, _List_Nil, _List_Nil),
+					A2(
+					$elm$html$Html$label,
+					_List_fromArray(
+						[
+							A2($elm$html$Html$Attributes$style, 'color', '#55EFC4'),
+							A2($elm$html$Html$Attributes$style, 'marginBottom', '5px')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(value)
+						])),
+					A2($elm$html$Html$br, _List_Nil, _List_Nil)
+				]));
+	});
+var $author$project$Main$salaryToHourly = function (str) {
+	return $author$project$Main$toFloatDef(str) / 2080;
+};
 var $author$project$Main$view = function (model) {
 	return A2(
-		$elm$html$Html$form,
-		_List_Nil,
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$id('app'),
+				A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+				A2($elm$html$Html$Attributes$style, 'flex-direction', 'row'),
+				A2($elm$html$Html$Attributes$style, 'justify-content', 'space-around'),
+				A2($elm$html$Html$Attributes$style, 'align-items', 'top'),
+				A2($elm$html$Html$Attributes$style, 'height', '100vh'),
+				A2($elm$html$Html$Attributes$style, 'margin', '0'),
+				A2($elm$html$Html$Attributes$style, 'font-family', 'Roboto, sans-serif'),
+				A2($elm$html$Html$Attributes$style, 'backgroundColor', '#1E272E'),
+				A2($elm$html$Html$Attributes$style, 'color', '#ECF0F1')
+			]),
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$h1,
-				_List_Nil,
+				$elm$html$Html$form,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Sarah\'s Salculator:')
-					])),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Number of Years Married')
-					])),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$placeholder('Years Married'),
-						$elm$html$Html$Attributes$value(model.I),
-						$elm$html$Html$Events$onInput($author$project$Main$ChangeYearsMarried)
+						A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+						A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
+						A2($elm$html$Html$Attributes$style, 'align-items', 'center')
 					]),
-				_List_Nil),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Sarah\'s Salary')
+						A2(
+						$elm$html$Html$h2,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Input Data:')
+							])),
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Number of Years Married')
+							])),
+						A3($author$project$Main$formInput, 'Years Married', model.aK, $author$project$Main$ChangeYearsMarried),
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Sarah\'s Salary')
+							])),
+						A3($author$project$Main$formInput, 'Sarah\'s Salary', model.R, $author$project$Main$ChangeSarahSalary),
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Sarah\'s Contribution %')
+							])),
+						A3($author$project$Main$formInput, 'Sarah\'s Contribution', model.ak, $author$project$Main$ChangeSarahCont),
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Kyle\'s Salary')
+							])),
+						A3($author$project$Main$formInput, 'Kyle\'s Salary', model.M, $author$project$Main$ChangeKyleSalary),
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Kyle\'s Contribution %')
+							])),
+						A3($author$project$Main$formInput, 'Kyle\'s Contribution', model.ae, $author$project$Main$ChangeKyleCont)
 					])),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
-				$elm$html$Html$input,
+				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$placeholder('Sarah Salary'),
-						$elm$html$Html$Attributes$value(model.z),
-						$elm$html$Html$Events$onInput($author$project$Main$ChangeSarahSalary)
+						A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+						A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
+						A2($elm$html$Html$Attributes$style, 'align-items', 'center')
 					]),
-				_List_Nil),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Sarah\'s Contribution %')
-					])),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$placeholder('Sarah Cont'),
-						$elm$html$Html$Attributes$value(model.y),
-						$elm$html$Html$Events$onInput($author$project$Main$ChangeSarahCont)
-					]),
-				_List_Nil),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Kyle\'s Salary')
-					])),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$placeholder('Kyle Salary'),
-						$elm$html$Html$Attributes$value(model.x),
-						$elm$html$Html$Events$onInput($author$project$Main$ChangeKyleSalary)
-					]),
-				_List_Nil),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Kyle\'s Contribution %')
-					])),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$placeholder('Kyle Cont'),
-						$elm$html$Html$Attributes$value(model.w),
-						$elm$html$Html$Events$onInput($author$project$Main$ChangeKyleCont)
-					]),
-				_List_Nil),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('------------------------------')
-					])),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$elm$core$String$concat(
-							_List_fromArray(
-								[
-									'Monthly Tithe: $',
-									A5($author$project$Main$calculateTithe, '0', model.z, model.y, model.x, model.w)
-								])))
-					])),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$label,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$elm$core$String$concat(
-							_List_fromArray(
-								[
-									'Monthly Tithe + Giving: $',
-									A5($author$project$Main$calculateTithe, model.I, model.z, model.y, model.x, model.w)
-								])))
+						A2(
+						$elm$html$Html$h2,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Output Data:')
+							])),
+						A2(
+						$author$project$Main$labeledValue,
+						'Monthly Tithe:',
+						$author$project$Main$formatCurrency(
+							A5($author$project$Main$calculateTithe, '0', model.R, model.ak, model.M, model.ae))),
+						A2(
+						$author$project$Main$labeledValue,
+						'Monthly Tithe + Giving:',
+						$author$project$Main$formatCurrency(
+							A5($author$project$Main$calculateTithe, model.aK, model.R, model.ak, model.M, model.ae))),
+						A2(
+						$author$project$Main$labeledValue,
+						'Sarah Hourly Salary:',
+						$author$project$Main$formatCurrency(
+							$author$project$Main$salaryToHourly(model.R))),
+						A2(
+						$author$project$Main$labeledValue,
+						'Kyle Hourly Salary:',
+						$author$project$Main$formatCurrency(
+							$author$project$Main$salaryToHourly(model.M)))
 					]))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$sandbox(
-	{ay: $author$project$Main$init, aG: $author$project$Main$update, aH: $author$project$Main$view});
+	{ce: $author$project$Main$init, cr: $author$project$Main$update, ct: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
