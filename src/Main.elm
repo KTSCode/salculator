@@ -8,6 +8,7 @@ import Html.Events exposing (onInput)
 
 -- MAIN
 
+main : Program () Model Msg
 main =
   Browser.sandbox { init = init, update = update, view = view }
 
