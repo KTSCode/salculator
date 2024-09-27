@@ -2719,7 +2719,7 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		F: func(record.F),
+		J: func(record.J),
 		ba: record.ba,
 		a7: record.a7
 	}
@@ -2989,7 +2989,7 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.F;
+		var message = !tag ? value : tag < 3 ? value.a : value.J;
 		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.ba;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
@@ -4407,7 +4407,7 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
-var $author$project$Main$init = {ae: '4', M: '', ak: '6', R: '', aK: '5'};
+var $author$project$Main$init = {u: '10', l: '', y: '10', m: '', aK: '7'};
 var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
@@ -5252,28 +5252,28 @@ var $author$project$Main$update = F2(
 				return _Utils_update(
 					model,
 					{
-						R: $author$project$Main$filterInput(val)
+						m: $author$project$Main$filterInput(val)
 					});
 			case 2:
 				var val = msg.a;
 				return _Utils_update(
 					model,
 					{
-						ak: $author$project$Main$filterInput(val)
+						y: $author$project$Main$filterInput(val)
 					});
 			case 3:
 				var val = msg.a;
 				return _Utils_update(
 					model,
 					{
-						M: $author$project$Main$filterInput(val)
+						l: $author$project$Main$filterInput(val)
 					});
 			default:
 				var val = msg.a;
 				return _Utils_update(
 					model,
 					{
-						ae: $author$project$Main$filterInput(val)
+						u: $author$project$Main$filterInput(val)
 					});
 		}
 	});
@@ -5312,6 +5312,13 @@ var $author$project$Main$toFloatDef = function (str) {
 		0,
 		$elm$core$String$toFloat(str));
 };
+var $author$project$Main$calculatePostRetirement = F2(
+	function (salary, contribution) {
+		return A2(
+			$author$project$Main$reduceByPercent,
+			$author$project$Main$toFloatDef(salary),
+			$author$project$Main$toFloatDef(contribution));
+	});
 var $author$project$Main$calculateTithe = F5(
 	function (yearsMarried, sarahSalary, sarahCont, kyleSalary, kyleCont) {
 		return function (x) {
@@ -5320,15 +5327,17 @@ var $author$project$Main$calculateTithe = F5(
 			function (x) {
 				return x / 12;
 			}(
-				A2(
-					$author$project$Main$reduceByPercent,
-					$author$project$Main$toFloatDef(kyleSalary),
-					$author$project$Main$toFloatDef(kyleCont)) + A2(
-					$author$project$Main$reduceByPercent,
-					$author$project$Main$toFloatDef(sarahSalary),
-					$author$project$Main$toFloatDef(sarahCont))));
+				A2($author$project$Main$calculatePostRetirement, kyleSalary, kyleCont) + A2($author$project$Main$calculatePostRetirement, sarahSalary, sarahCont)));
+	});
+var $author$project$Main$combinedPostRetirement = F4(
+	function (sal1, cont1, sal2, cont2) {
+		return A2($author$project$Main$reduceByPercent, sal1, cont1) + A2($author$project$Main$reduceByPercent, sal2, cont2);
 	});
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$core$String$fromFloat = _String_fromNumber;
+var $author$project$Main$floatToString = function (number) {
+	return $elm$core$String$fromFloat(number);
+};
 var $elm$html$Html$form = _VirtualDom_node('form');
 var $elm$html$Html$br = _VirtualDom_node('br');
 var $elm$html$Html$input = _VirtualDom_node('input');
@@ -5407,7 +5416,6 @@ var $elm$core$Basics$negate = function (n) {
 var $elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
 };
-var $elm$core$String$fromFloat = _String_fromNumber;
 var $elm$core$String$cons = _String_cons;
 var $elm$core$String$fromChar = function (_char) {
 	return A2($elm$core$String$cons, _char, '');
@@ -5455,6 +5463,7 @@ var $author$project$Main$formatCurrency = function (amount) {
 							100 * $elm$core$Basics$abs(amount)))))));
 };
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
@@ -5493,8 +5502,26 @@ var $author$project$Main$labeledValue = F2(
 					A2($elm$html$Html$br, _List_Nil, _List_Nil)
 				]));
 	});
+var $author$project$Main$monthly = function (salary) {
+	return salary / 12;
+};
+var $author$project$Main$monthlyPostRetirement = F2(
+	function (salary, contribution) {
+		return A2(
+			$author$project$Main$reduceByPercent,
+			$author$project$Main$monthly(salary),
+			contribution);
+	});
+var $author$project$Main$monthlyCombinedPostRetirement = F4(
+	function (sal1, cont1, sal2, cont2) {
+		return A2($author$project$Main$monthlyPostRetirement, sal1, cont1) + A2($author$project$Main$monthlyPostRetirement, sal2, cont2);
+	});
 var $author$project$Main$salaryToHourly = function (str) {
 	return $author$project$Main$toFloatDef(str) / 2080;
+};
+var $author$project$Main$salaryToMonthly = function (str) {
+	return $author$project$Main$monthly(
+		$author$project$Main$toFloatDef(str));
 };
 var $author$project$Main$view = function (model) {
 	return A2(
@@ -5510,7 +5537,8 @@ var $author$project$Main$view = function (model) {
 				A2($elm$html$Html$Attributes$style, 'margin', '0'),
 				A2($elm$html$Html$Attributes$style, 'font-family', 'Roboto, sans-serif'),
 				A2($elm$html$Html$Attributes$style, 'backgroundColor', '#1E272E'),
-				A2($elm$html$Html$Attributes$style, 'color', '#ECF0F1')
+				A2($elm$html$Html$Attributes$style, 'color', '#ECF0F1'),
+				A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
 			]),
 		_List_fromArray(
 			[
@@ -5520,7 +5548,10 @@ var $author$project$Main$view = function (model) {
 					[
 						A2($elm$html$Html$Attributes$style, 'display', 'flex'),
 						A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
-						A2($elm$html$Html$Attributes$style, 'align-items', 'center')
+						A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
+						A2($elm$html$Html$Attributes$style, 'width', '100%'),
+						A2($elm$html$Html$Attributes$style, 'max-width', '600px'),
+						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
 					]),
 				_List_fromArray(
 					[
@@ -5546,7 +5577,7 @@ var $author$project$Main$view = function (model) {
 							[
 								$elm$html$Html$text('Sarah\'s Salary')
 							])),
-						A3($author$project$Main$formInput, 'Sarah\'s Salary', model.R, $author$project$Main$ChangeSarahSalary),
+						A3($author$project$Main$formInput, 'Sarah\'s Salary', model.m, $author$project$Main$ChangeSarahSalary),
 						A2(
 						$elm$html$Html$label,
 						_List_Nil,
@@ -5554,7 +5585,7 @@ var $author$project$Main$view = function (model) {
 							[
 								$elm$html$Html$text('Sarah\'s Contribution %')
 							])),
-						A3($author$project$Main$formInput, 'Sarah\'s Contribution', model.ak, $author$project$Main$ChangeSarahCont),
+						A3($author$project$Main$formInput, 'Sarah\'s Contribution', model.y, $author$project$Main$ChangeSarahCont),
 						A2(
 						$elm$html$Html$label,
 						_List_Nil,
@@ -5562,7 +5593,7 @@ var $author$project$Main$view = function (model) {
 							[
 								$elm$html$Html$text('Kyle\'s Salary')
 							])),
-						A3($author$project$Main$formInput, 'Kyle\'s Salary', model.M, $author$project$Main$ChangeKyleSalary),
+						A3($author$project$Main$formInput, 'Kyle\'s Salary', model.l, $author$project$Main$ChangeKyleSalary),
 						A2(
 						$elm$html$Html$label,
 						_List_Nil,
@@ -5570,7 +5601,7 @@ var $author$project$Main$view = function (model) {
 							[
 								$elm$html$Html$text('Kyle\'s Contribution %')
 							])),
-						A3($author$project$Main$formInput, 'Kyle\'s Contribution', model.ae, $author$project$Main$ChangeKyleCont)
+						A3($author$project$Main$formInput, 'Kyle\'s Contribution', model.u, $author$project$Main$ChangeKyleCont)
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -5578,7 +5609,12 @@ var $author$project$Main$view = function (model) {
 					[
 						A2($elm$html$Html$Attributes$style, 'display', 'flex'),
 						A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
-						A2($elm$html$Html$Attributes$style, 'align-items', 'center')
+						A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
+						A2($elm$html$Html$Attributes$style, 'width', '100%'),
+						A2($elm$html$Html$Attributes$style, 'max-width', '600px'),
+						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
+						A2($elm$html$Html$Attributes$style, 'margin-top', '20px'),
+						A2($elm$html$Html$Attributes$style, 'padding-top', '20px')
 					]),
 				_List_fromArray(
 					[
@@ -5593,22 +5629,142 @@ var $author$project$Main$view = function (model) {
 						$author$project$Main$labeledValue,
 						'Monthly Tithe:',
 						$author$project$Main$formatCurrency(
-							A5($author$project$Main$calculateTithe, '0', model.R, model.ak, model.M, model.ae))),
+							A5($author$project$Main$calculateTithe, '0', model.m, model.y, model.l, model.u))),
 						A2(
 						$author$project$Main$labeledValue,
 						'Monthly Tithe + Giving:',
 						$author$project$Main$formatCurrency(
-							A5($author$project$Main$calculateTithe, model.aK, model.R, model.ak, model.M, model.ae))),
+							A5($author$project$Main$calculateTithe, model.aK, model.m, model.y, model.l, model.u))),
 						A2(
 						$author$project$Main$labeledValue,
-						'Sarah Hourly Salary:',
+						'Combinged Yearly Salary:',
 						$author$project$Main$formatCurrency(
-							$author$project$Main$salaryToHourly(model.R))),
+							$author$project$Main$toFloatDef(model.m) + $author$project$Main$toFloatDef(model.l))),
 						A2(
 						$author$project$Main$labeledValue,
-						'Kyle Hourly Salary:',
+						'Combinged Post Retirement Yearly Salary:',
 						$author$project$Main$formatCurrency(
-							$author$project$Main$salaryToHourly(model.M)))
+							A4(
+								$author$project$Main$combinedPostRetirement,
+								$author$project$Main$toFloatDef(model.l),
+								$author$project$Main$toFloatDef(model.u),
+								$author$project$Main$toFloatDef(model.m),
+								$author$project$Main$toFloatDef(model.y)))),
+						A2(
+						$author$project$Main$labeledValue,
+						'Combinged Monthly Salary:',
+						$author$project$Main$formatCurrency(
+							$author$project$Main$monthly(
+								$author$project$Main$toFloatDef(model.m)) + $author$project$Main$toFloatDef(model.l))),
+						A2(
+						$author$project$Main$labeledValue,
+						'Combinged Post Retirement Monthly Salary:',
+						$author$project$Main$formatCurrency(
+							A4(
+								$author$project$Main$monthlyCombinedPostRetirement,
+								$author$project$Main$toFloatDef(model.l),
+								$author$project$Main$toFloatDef(model.u),
+								$author$project$Main$toFloatDef(model.m),
+								$author$project$Main$toFloatDef(model.y)))),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+								A2($elm$html$Html$Attributes$style, 'flex-direction', 'row'),
+								A2($elm$html$Html$Attributes$style, 'justify-content', 'space-between'),
+								A2($elm$html$Html$Attributes$style, 'width', '100%')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'flex', '1'),
+										A2($elm$html$Html$Attributes$style, 'margin-right', '10px')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h3,
+										_List_fromArray(
+											[
+												A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Sarah')
+											])),
+										A2(
+										$author$project$Main$labeledValue,
+										'Post Retirement Yearly Salary:',
+										$author$project$Main$formatCurrency(
+											A2($author$project$Main$calculatePostRetirement, model.m, model.y))),
+										A2(
+										$author$project$Main$labeledValue,
+										'Monthly Salary:',
+										$author$project$Main$formatCurrency(
+											$author$project$Main$salaryToMonthly(model.m))),
+										A2(
+										$author$project$Main$labeledValue,
+										'Post Retirement Monthly Salary:',
+										$author$project$Main$formatCurrency(
+											A2(
+												$author$project$Main$calculatePostRetirement,
+												$author$project$Main$floatToString(
+													$author$project$Main$salaryToMonthly(model.m)),
+												model.y))),
+										A2(
+										$author$project$Main$labeledValue,
+										'Hourly Salary:',
+										$author$project$Main$formatCurrency(
+											$author$project$Main$salaryToHourly(model.m)))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'flex', '1')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h3,
+										_List_fromArray(
+											[
+												A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Kyle')
+											])),
+										A2(
+										$author$project$Main$labeledValue,
+										'Post Retirement Yearly Salary:',
+										$author$project$Main$formatCurrency(
+											A2($author$project$Main$calculatePostRetirement, model.l, model.u))),
+										A2(
+										$author$project$Main$labeledValue,
+										'Monthly Salary:',
+										$author$project$Main$formatCurrency(
+											$author$project$Main$salaryToMonthly(model.l))),
+										A2(
+										$author$project$Main$labeledValue,
+										'Post Retirement Monthly Salary:',
+										$author$project$Main$formatCurrency(
+											A2(
+												$author$project$Main$calculatePostRetirement,
+												$author$project$Main$floatToString(
+													$author$project$Main$salaryToMonthly(model.l)),
+												model.u))),
+										A2(
+										$author$project$Main$labeledValue,
+										'Hourly Salary:',
+										$author$project$Main$formatCurrency(
+											$author$project$Main$salaryToHourly(model.l)))
+									]))
+							]))
 					]))
 			]));
 };
