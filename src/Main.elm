@@ -319,21 +319,7 @@ stringSum str1 str2 =
 
 
 -- VIEW
---HTML functions
-
-
-labeledValue : String -> String -> Html Msg
-labeledValue label value =
-    Html.div
-        [ Attr.style "display" "flex"
-        , Attr.style "flex-direction" "column"
-        , Attr.style "align-items" "center"
-        ]
-        [ Html.label [] [ text label ]
-        , Html.br [] []
-        , Html.label [ Attr.style "color" "#55EFC4", Attr.style "marginBottom" "5px" ] [ text value ]
-        , Html.br [] []
-        ]
+-- HTML functions
 
 
 formInput : String -> String -> (String -> Msg) -> Html Msg
@@ -343,13 +329,27 @@ formInput ph val oi =
             [ placeholder ph
             , value val
             , onInput oi
-            , Attr.style "backgroundColor" "#485460"
-            , Attr.style "color" "#ECF0F1"
-            , Attr.style "margin" "10px"
+            , Attr.class "bg-gray-700 text-gray-200 my-2 px-4 py-3 rounded w-full max-w-full text-lg"
             ]
             []
         , br [] []
         , br [] []
+        ]
+
+
+formLabel : String -> Html msg
+formLabel labelText =
+    label [ Attr.class "text-xl sm:text-2xl mb-1" ] [ text labelText ]
+
+
+labeledValue : String -> String -> Html Msg
+labeledValue label value =
+    Html.div
+        [ Attr.class "flex flex-col items-center" ]
+        [ Html.label [] [ text label ]
+        , Html.br [] []
+        , Html.label [ Attr.class "text-green-400 mb-5" ] [ text value ]
+        , Html.br [] []
         ]
 
 
@@ -361,78 +361,48 @@ view : Model -> Html Msg
 view model =
     div
         [ Attr.id "app"
-        , Attr.style "display" "flex"
-        , Attr.style "flex-direction" "column" -- Stack items vertically by default
-        , Attr.style "align-items" "center"
-        , Attr.style "justify-content" "center"
-        , Attr.style "font-family" "Roboto, sans-serif"
-        , Attr.style "background-color" "#1E272E"
-        , Attr.style "color" "#ECF0F1"
-        , Attr.style "flex-wrap" "wrap"
-        , Attr.style "padding" "10px" -- Make sure padding is light
-        , Attr.style "box-sizing" "border-box"
-        , Attr.style "width" "100%"
-        , Attr.style "gap" "10px" -- Use gap to give consistent space between items
+        , Attr.class "flex flex-col xl:flex-row justify-start items-start min-h-screen m-0 font-sans bg-gray-900 text-gray-100 pt-1 sm:pt-5 gap-6"
         ]
         [ Html.form
-            [ Attr.style "display" "flex"
-            , Attr.style "flex-direction" "column"
-            , Attr.style "align-items" "center"
-            , Attr.style "width" "100%" -- Take full width of parent container
-            , Attr.style "max-width" "90%" -- Let max-width adjust to container
-            , Attr.style "box-sizing" "border-box"
-            , Attr.style "margin-bottom" "10px"
-            , Attr.style "padding" "5px"
-            ]
-            [ h2 [] [ text "Input Data:" ]
-            , label [] [ text "Number of Years Married" ]
+            [ Attr.class "flex flex-col items-center w-full xl:w-1/2 max-w-lg mb-5 p-4 gap-2 mx-auto" ]
+            [ h2 [ Attr.class "text-3xl sm:text-4xl mb-4" ] [ text "Input Data:" ]
+            , formLabel "Number of Years Married"
             , formInput "Years Married" model.yearsMarried ChangeYearsMarried
-            , label [] [ text "Sarah's Salary" ]
+            , formLabel "Sarah's Salary"
             , formInput "Sarah's Salary" model.sarahSalary ChangeSarahSalary
-            , label [] [ text "Sarah's Contribution %" ]
+            , formLabel "Sarah's Contribution %"
             , formInput "Sarah's Contribution" model.sarahCont ChangeSarahCont
-            , label [] [ text "Kyle's Salary" ]
+            , formLabel "Kyle's Salary"
             , formInput "Kyle's Salary" model.kyleSalary ChangeKyleSalary
-            , label [] [ text "Kyle's Contribution %" ]
+            , formLabel "Kyle's Contribution %"
             , formInput "Kyle's Contribution" model.kyleCont ChangeKyleCont
             ]
         , div
-            [ Attr.style "display" "flex"
-            , Attr.style "flex-direction" "column"
-            , Attr.style "align-items" "center"
-            , Attr.style "width" "100%" -- Let the div take full width
-            , Attr.style "max-width" "90%" -- Cap the width with a percentage-based max-width
-            , Attr.style "box-sizing" "border-box"
-            , Attr.style "padding" "10px" -- Add consistent padding
-            , Attr.style "flex-grow" "1" -- Let the content grow naturally
-            ]
-            [ h2 [] [ text "Output Data:" ]
+            [ Attr.class "flex flex-col items-center w-full xl:w-1/2 max-w-lg pt-5 text-center gap-4 mx-auto" ]
+            [ h2 [ Attr.class "text-3xl sm:text-4xl mb-4" ] [ text "Output Data:" ]
             , labeledValue "Monthly Tithe:" model.monthlyTithe
             , labeledValue "Monthly Tithe + Giving:" model.monthlyTitheAndGiving
-            , labeledValue "Combined Yearly Salary:" model.combinedYearlySalary
-            , labeledValue "Combined Post Retirement Yearly Salary:" model.combinedPostRetirementYearlySalary
-            , labeledValue "Combined Monthly Salary:" model.combinedMonthlySalary
-            , labeledValue "Combined Post Retirement Monthly Salary:" model.combinedPostRetirementMonthlySalary
             , div
-                [ Attr.style "display" "flex"
-                , Attr.style "flex-direction" "row" -- Row layout for Sarah and Kyle columns
-                , Attr.style "justify-content" "space-between"
-                , Attr.style "width" "100%"
+                [ Attr.class "flex-1 mr-2" ]
+                [ h3 [ Attr.class "text-2xl sm:text-3xl mb-2" ] [ text "Combined" ]
+                , labeledValue "Yearly Salary:" model.combinedYearlySalary
+                , labeledValue "Post Retirement Yearly Salary:" model.combinedPostRetirementYearlySalary
+                , labeledValue "Monthly Salary:" model.combinedMonthlySalary
+                , labeledValue "Post Retirement Monthly Salary:" model.combinedPostRetirementMonthlySalary
                 ]
+            , div
+                [ Attr.class "flex flex-col sm:flex-row justify-between w-full gap-6" ]
                 [ div
-                    [ Attr.style "flex" "1"
-                    , Attr.style "margin-right" "5px"
-                    ]
-                    [ h3 [ Attr.style "text-align" "center" ] [ text "Sarah" ]
+                    [ Attr.class "flex-1 mr-2" ]
+                    [ h3 [ Attr.class "text-xl sm:text-2xl text-center" ] [ text "Sarah" ]
                     , labeledValue "Post Retirement Yearly Salary:" model.sarah.postRetirementYearlySalary
                     , labeledValue "Monthly Salary:" model.sarah.monthlySalary
                     , labeledValue "Post Retirement Monthly Salary:" model.sarah.postRetirementMonthlySalary
                     , labeledValue "Hourly Salary:" model.sarah.hourlySalary
                     ]
                 , div
-                    [ Attr.style "flex" "1"
-                    ]
-                    [ h3 [ Attr.style "text-align" "center" ] [ text "Kyle" ]
+                    [ Attr.class "flex-1" ]
+                    [ h3 [ Attr.class "text-xl sm:text-2xl text-center" ] [ text "Kyle" ]
                     , labeledValue "Post Retirement Yearly Salary:" model.kyle.postRetirementYearlySalary
                     , labeledValue "Monthly Salary:" model.kyle.monthlySalary
                     , labeledValue "Post Retirement Monthly Salary:" model.kyle.postRetirementMonthlySalary
