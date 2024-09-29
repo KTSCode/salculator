@@ -5602,16 +5602,14 @@ var $author$project$Main$view = function (model) {
 			[
 				$elm$html$Html$Attributes$id('app'),
 				A2($elm$html$Html$Attributes$style, 'display', 'flex'),
-				A2($elm$html$Html$Attributes$style, 'flex-direction', 'row'),
-				A2($elm$html$Html$Attributes$style, 'justify-content', 'space-around'),
-				A2($elm$html$Html$Attributes$style, 'align-items', 'flex-start'),
-				A2($elm$html$Html$Attributes$style, 'height', '100vh'),
-				A2($elm$html$Html$Attributes$style, 'margin', '0'),
+				A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
+				A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
+				A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
 				A2($elm$html$Html$Attributes$style, 'font-family', 'Roboto, sans-serif'),
 				A2($elm$html$Html$Attributes$style, 'background-color', '#1E272E'),
 				A2($elm$html$Html$Attributes$style, 'color', '#ECF0F1'),
 				A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap'),
-				A2($elm$html$Html$Attributes$style, 'padding', '20px'),
+				A2($elm$html$Html$Attributes$style, 'padding', '10px'),
 				A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
 				A2($elm$html$Html$Attributes$style, 'width', '100%'),
 				A2($elm$html$Html$Attributes$style, 'gap', '10px')
@@ -5626,10 +5624,10 @@ var $author$project$Main$view = function (model) {
 						A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
 						A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
 						A2($elm$html$Html$Attributes$style, 'width', '100%'),
-						A2($elm$html$Html$Attributes$style, 'max-width', '600px'),
+						A2($elm$html$Html$Attributes$style, 'max-width', '90%'),
 						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
-						A2($elm$html$Html$Attributes$style, 'margin-bottom', '20px'),
-						A2($elm$html$Html$Attributes$style, 'flex-grow', '1')
+						A2($elm$html$Html$Attributes$style, 'margin-bottom', '10px'),
+						A2($elm$html$Html$Attributes$style, 'padding', '5px')
 					]),
 				_List_fromArray(
 					[
@@ -5689,9 +5687,9 @@ var $author$project$Main$view = function (model) {
 						A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
 						A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
 						A2($elm$html$Html$Attributes$style, 'width', '100%'),
-						A2($elm$html$Html$Attributes$style, 'max-width', '600px'),
+						A2($elm$html$Html$Attributes$style, 'max-width', '90%'),
 						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
-						A2($elm$html$Html$Attributes$style, 'padding-top', '20px'),
+						A2($elm$html$Html$Attributes$style, 'padding', '10px'),
 						A2($elm$html$Html$Attributes$style, 'flex-grow', '1')
 					]),
 				_List_fromArray(
@@ -5725,7 +5723,7 @@ var $author$project$Main$view = function (model) {
 								_List_fromArray(
 									[
 										A2($elm$html$Html$Attributes$style, 'flex', '1'),
-										A2($elm$html$Html$Attributes$style, 'margin-right', '10px')
+										A2($elm$html$Html$Attributes$style, 'margin-right', '5px')
 									]),
 								_List_fromArray(
 									[

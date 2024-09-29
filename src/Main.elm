@@ -362,29 +362,27 @@ view model =
     div
         [ Attr.id "app"
         , Attr.style "display" "flex"
-        , Attr.style "flex-direction" "row"
-        , Attr.style "justify-content" "space-around"
-        , Attr.style "align-items" "flex-start"
-        , Attr.style "height" "100vh"
-        , Attr.style "margin" "0"
+        , Attr.style "flex-direction" "column" -- Stack items vertically by default
+        , Attr.style "align-items" "center"
+        , Attr.style "justify-content" "center"
         , Attr.style "font-family" "Roboto, sans-serif"
         , Attr.style "background-color" "#1E272E"
         , Attr.style "color" "#ECF0F1"
         , Attr.style "flex-wrap" "wrap"
-        , Attr.style "padding" "20px"
+        , Attr.style "padding" "10px" -- Make sure padding is light
         , Attr.style "box-sizing" "border-box"
         , Attr.style "width" "100%"
-        , Attr.style "gap" "10px"
+        , Attr.style "gap" "10px" -- Use gap to give consistent space between items
         ]
         [ Html.form
             [ Attr.style "display" "flex"
             , Attr.style "flex-direction" "column"
             , Attr.style "align-items" "center"
-            , Attr.style "width" "100%"
-            , Attr.style "max-width" "600px"
+            , Attr.style "width" "100%" -- Take full width of parent container
+            , Attr.style "max-width" "90%" -- Let max-width adjust to container
             , Attr.style "box-sizing" "border-box"
-            , Attr.style "margin-bottom" "20px"
-            , Attr.style "flex-grow" "1"
+            , Attr.style "margin-bottom" "10px"
+            , Attr.style "padding" "5px"
             ]
             [ h2 [] [ text "Input Data:" ]
             , label [] [ text "Number of Years Married" ]
@@ -402,11 +400,11 @@ view model =
             [ Attr.style "display" "flex"
             , Attr.style "flex-direction" "column"
             , Attr.style "align-items" "center"
-            , Attr.style "width" "100%"
-            , Attr.style "max-width" "600px"
+            , Attr.style "width" "100%" -- Let the div take full width
+            , Attr.style "max-width" "90%" -- Cap the width with a percentage-based max-width
             , Attr.style "box-sizing" "border-box"
-            , Attr.style "padding-top" "20px"
-            , Attr.style "flex-grow" "1"
+            , Attr.style "padding" "10px" -- Add consistent padding
+            , Attr.style "flex-grow" "1" -- Let the content grow naturally
             ]
             [ h2 [] [ text "Output Data:" ]
             , labeledValue "Monthly Tithe:" model.monthlyTithe
@@ -417,13 +415,13 @@ view model =
             , labeledValue "Combined Post Retirement Monthly Salary:" model.combinedPostRetirementMonthlySalary
             , div
                 [ Attr.style "display" "flex"
-                , Attr.style "flex-direction" "row"
+                , Attr.style "flex-direction" "row" -- Row layout for Sarah and Kyle columns
                 , Attr.style "justify-content" "space-between"
                 , Attr.style "width" "100%"
                 ]
                 [ div
                     [ Attr.style "flex" "1"
-                    , Attr.style "margin-right" "10px"
+                    , Attr.style "margin-right" "5px"
                     ]
                     [ h3 [ Attr.style "text-align" "center" ] [ text "Sarah" ]
                     , labeledValue "Post Retirement Yearly Salary:" model.sarah.postRetirementYearlySalary
