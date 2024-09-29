@@ -365,48 +365,47 @@ view model =
         ]
         [ Html.form
             [ Attr.class "flex flex-col items-center w-full sm:w-3/4 md:w-2/3 xl:w-1/2 mb-5 p-4 gap-2 mx-auto" ]
-            [ h2 [ Attr.class "text-4xl sm:text-5xl mb-4" ] [ text "Input Data:" ] -- Increase text size
-            , formLabel "Number of Years Married"
+            [ h2 [ Attr.class "text-4xl sm:text-5xl mb-4" ] [ text "Salculator" ] -- Increase text size
+            , formLabel "Number of Years Married:"
             , formInput "Years Married" model.yearsMarried ChangeYearsMarried
-            , formLabel "Sarah's Salary"
+            , formLabel "Sarah's Salary:"
             , formInput "Sarah's Salary" model.sarahSalary ChangeSarahSalary
-            , formLabel "Sarah's Contribution %"
+            , formLabel "Sarah's Contribution Percent:"
             , formInput "Sarah's Contribution" model.sarahCont ChangeSarahCont
-            , formLabel "Kyle's Salary"
+            , formLabel "Kyle's Salary:"
             , formInput "Kyle's Salary" model.kyleSalary ChangeKyleSalary
-            , formLabel "Kyle's Contribution %"
+            , formLabel "Kyle's Contribution Percent:"
             , formInput "Kyle's Contribution" model.kyleCont ChangeKyleCont
             ]
         , div
             [ Attr.class "flex flex-col items-center w-full sm:w-3/4 md:w-2/3 xl:w-1/2 pt-5 text-center gap-4 mx-auto" ]
-            [ h2 [ Attr.class "text-4xl sm:text-5xl mb-4" ] [ text "Output Data:" ] -- Increase text size
-            , labeledValue "Monthly Tithe:" model.monthlyTithe
-            , labeledValue "Monthly Tithe + Giving:" model.monthlyTitheAndGiving
+            [ labeledValue "Monthly Tithe" model.monthlyTithe
+            , labeledValue "Monthly Tithe + Giving" model.monthlyTitheAndGiving
             , div
                 [ Attr.class "flex-1 mr-2" ]
-                [ h3 [ Attr.class "text-3xl sm:text-4xl mb-2" ] [ text "Combined" ] -- Increase text size
-                , labeledValue "Yearly Salary:" model.combinedYearlySalary
-                , labeledValue "Post Retirement Yearly Salary:" model.combinedPostRetirementYearlySalary
-                , labeledValue "Monthly Salary:" model.combinedMonthlySalary
-                , labeledValue "Post Retirement Monthly Salary:" model.combinedPostRetirementMonthlySalary
+                [ h3 [ Attr.class "text-3xl sm:text-4xl mb-2" ] [ text "Combined:" ] -- Increase text size
+                , labeledValue "Yearly Salary" model.combinedYearlySalary
+                , labeledValue "Post Retirement Yearly Salary" model.combinedPostRetirementYearlySalary
+                , labeledValue "Monthly Salary" model.combinedMonthlySalary
+                , labeledValue "Post Retirement Monthly Salary" model.combinedPostRetirementMonthlySalary
                 ]
             , div
                 [ Attr.class "flex flex-col sm:flex-row justify-between w-full gap-6" ]
                 [ div
                     [ Attr.class "flex-1 mr-2" ]
-                    [ h3 [ Attr.class "text-2xl sm:text-3xl text-center" ] [ text "Sarah" ] -- Increase text size
-                    , labeledValue "Post Retirement Yearly Salary:" model.sarah.postRetirementYearlySalary
-                    , labeledValue "Monthly Salary:" model.sarah.monthlySalary
-                    , labeledValue "Post Retirement Monthly Salary:" model.sarah.postRetirementMonthlySalary
-                    , labeledValue "Hourly Salary:" model.sarah.hourlySalary
+                    [ h3 [ Attr.class "text-2xl sm:text-3xl text-center" ] [ text "Sarah:" ] -- Increase text size
+                    , labeledValue "Post Retirement Yearly Salary" model.sarah.postRetirementYearlySalary
+                    , labeledValue "Monthly Salary" model.sarah.monthlySalary
+                    , labeledValue "Post Retirement Monthly Salary" model.sarah.postRetirementMonthlySalary
+                    , labeledValue "Hourly Salary" model.sarah.hourlySalary
                     ]
                 , div
                     [ Attr.class "flex-1" ]
-                    [ h3 [ Attr.class "text-2xl sm:text-3xl text-center" ] [ text "Kyle" ] -- Increase text size
-                    , labeledValue "Post Retirement Yearly Salary:" model.kyle.postRetirementYearlySalary
-                    , labeledValue "Monthly Salary:" model.kyle.monthlySalary
-                    , labeledValue "Post Retirement Monthly Salary:" model.kyle.postRetirementMonthlySalary
-                    , labeledValue "Hourly Salary:" model.kyle.hourlySalary
+                    [ h3 [ Attr.class "text-2xl sm:text-3xl text-center" ] [ text "Kyle:" ] -- Increase text size
+                    , labeledValue "Post Retirement Yearly Salary" model.kyle.postRetirementYearlySalary
+                    , labeledValue "Monthly Salary" model.kyle.monthlySalary
+                    , labeledValue "Post Retirement Monthly Salary" model.kyle.postRetirementMonthlySalary
+                    , labeledValue "Hourly Salary" model.kyle.hourlySalary
                     ]
                 ]
             ]

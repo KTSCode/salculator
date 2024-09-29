@@ -5627,17 +5627,17 @@ var $author$project$Main$view = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Input Data:')
+								$elm$html$Html$text('Salculator')
 							])),
-						$author$project$Main$formLabel('Number of Years Married'),
+						$author$project$Main$formLabel('Number of Years Married:'),
 						A3($author$project$Main$formInput, 'Years Married', model.aQ, $author$project$Main$ChangeYearsMarried),
-						$author$project$Main$formLabel('Sarah\'s Salary'),
+						$author$project$Main$formLabel('Sarah\'s Salary:'),
 						A3($author$project$Main$formInput, 'Sarah\'s Salary', model.m, $author$project$Main$ChangeSarahSalary),
-						$author$project$Main$formLabel('Sarah\'s Contribution %'),
+						$author$project$Main$formLabel('Sarah\'s Contribution Percent:'),
 						A3($author$project$Main$formInput, 'Sarah\'s Contribution', model.y, $author$project$Main$ChangeSarahCont),
-						$author$project$Main$formLabel('Kyle\'s Salary'),
+						$author$project$Main$formLabel('Kyle\'s Salary:'),
 						A3($author$project$Main$formInput, 'Kyle\'s Salary', model.l, $author$project$Main$ChangeKyleSalary),
-						$author$project$Main$formLabel('Kyle\'s Contribution %'),
+						$author$project$Main$formLabel('Kyle\'s Contribution Percent:'),
 						A3($author$project$Main$formInput, 'Kyle\'s Contribution', model.u, $author$project$Main$ChangeKyleCont)
 					])),
 				A2(
@@ -5648,18 +5648,8 @@ var $author$project$Main$view = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$h2,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('text-4xl sm:text-5xl mb-4')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Output Data:')
-							])),
-						A2($author$project$Main$labeledValue, 'Monthly Tithe:', model.a$),
-						A2($author$project$Main$labeledValue, 'Monthly Tithe + Giving:', model.a0),
+						A2($author$project$Main$labeledValue, 'Monthly Tithe', model.a$),
+						A2($author$project$Main$labeledValue, 'Monthly Tithe + Giving', model.a0),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
@@ -5676,12 +5666,12 @@ var $author$project$Main$view = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Combined')
+										$elm$html$Html$text('Combined:')
 									])),
-								A2($author$project$Main$labeledValue, 'Yearly Salary:', model.aW),
-								A2($author$project$Main$labeledValue, 'Post Retirement Yearly Salary:', model.aV),
-								A2($author$project$Main$labeledValue, 'Monthly Salary:', model.aT),
-								A2($author$project$Main$labeledValue, 'Post Retirement Monthly Salary:', model.aU)
+								A2($author$project$Main$labeledValue, 'Yearly Salary', model.aW),
+								A2($author$project$Main$labeledValue, 'Post Retirement Yearly Salary', model.aV),
+								A2($author$project$Main$labeledValue, 'Monthly Salary', model.aT),
+								A2($author$project$Main$labeledValue, 'Post Retirement Monthly Salary', model.aU)
 							])),
 						A2(
 						$elm$html$Html$div,
@@ -5707,12 +5697,12 @@ var $author$project$Main$view = function (model) {
 											]),
 										_List_fromArray(
 											[
-												$elm$html$Html$text('Sarah')
+												$elm$html$Html$text('Sarah:')
 											])),
-										A2($author$project$Main$labeledValue, 'Post Retirement Yearly Salary:', model.Z.X),
-										A2($author$project$Main$labeledValue, 'Monthly Salary:', model.Z.U),
-										A2($author$project$Main$labeledValue, 'Post Retirement Monthly Salary:', model.Z.W),
-										A2($author$project$Main$labeledValue, 'Hourly Salary:', model.Z.Q)
+										A2($author$project$Main$labeledValue, 'Post Retirement Yearly Salary', model.Z.X),
+										A2($author$project$Main$labeledValue, 'Monthly Salary', model.Z.U),
+										A2($author$project$Main$labeledValue, 'Post Retirement Monthly Salary', model.Z.W),
+										A2($author$project$Main$labeledValue, 'Hourly Salary', model.Z.Q)
 									])),
 								A2(
 								$elm$html$Html$div,
@@ -5730,12 +5720,12 @@ var $author$project$Main$view = function (model) {
 											]),
 										_List_fromArray(
 											[
-												$elm$html$Html$text('Kyle')
+												$elm$html$Html$text('Kyle:')
 											])),
-										A2($author$project$Main$labeledValue, 'Post Retirement Yearly Salary:', model.R.X),
-										A2($author$project$Main$labeledValue, 'Monthly Salary:', model.R.U),
-										A2($author$project$Main$labeledValue, 'Post Retirement Monthly Salary:', model.R.W),
-										A2($author$project$Main$labeledValue, 'Hourly Salary:', model.R.Q)
+										A2($author$project$Main$labeledValue, 'Post Retirement Yearly Salary', model.R.X),
+										A2($author$project$Main$labeledValue, 'Monthly Salary', model.R.U),
+										A2($author$project$Main$labeledValue, 'Post Retirement Monthly Salary', model.R.W),
+										A2($author$project$Main$labeledValue, 'Hourly Salary', model.R.Q)
 									]))
 							]))
 					]))
