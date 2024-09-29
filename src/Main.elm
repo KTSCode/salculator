@@ -364,8 +364,8 @@ view model =
         , Attr.class "flex flex-col xl:flex-row justify-start items-start min-h-screen m-0 font-sans bg-gray-900 text-gray-100 pt-1 sm:pt-5 gap-6"
         ]
         [ Html.form
-            [ Attr.class "flex flex-col items-center w-full xl:w-1/2 max-w-lg mb-5 p-4 gap-2 mx-auto" ]
-            [ h2 [ Attr.class "text-3xl sm:text-4xl mb-4" ] [ text "Input Data:" ]
+            [ Attr.class "flex flex-col items-center w-full sm:w-3/4 md:w-2/3 xl:w-1/2 mb-5 p-4 gap-2 mx-auto" ]
+            [ h2 [ Attr.class "text-4xl sm:text-5xl mb-4" ] [ text "Input Data:" ] -- Increase text size
             , formLabel "Number of Years Married"
             , formInput "Years Married" model.yearsMarried ChangeYearsMarried
             , formLabel "Sarah's Salary"
@@ -378,13 +378,13 @@ view model =
             , formInput "Kyle's Contribution" model.kyleCont ChangeKyleCont
             ]
         , div
-            [ Attr.class "flex flex-col items-center w-full xl:w-1/2 max-w-lg pt-5 text-center gap-4 mx-auto" ]
-            [ h2 [ Attr.class "text-3xl sm:text-4xl mb-4" ] [ text "Output Data:" ]
+            [ Attr.class "flex flex-col items-center w-full sm:w-3/4 md:w-2/3 xl:w-1/2 pt-5 text-center gap-4 mx-auto" ]
+            [ h2 [ Attr.class "text-4xl sm:text-5xl mb-4" ] [ text "Output Data:" ] -- Increase text size
             , labeledValue "Monthly Tithe:" model.monthlyTithe
             , labeledValue "Monthly Tithe + Giving:" model.monthlyTitheAndGiving
             , div
                 [ Attr.class "flex-1 mr-2" ]
-                [ h3 [ Attr.class "text-2xl sm:text-3xl mb-2" ] [ text "Combined" ]
+                [ h3 [ Attr.class "text-3xl sm:text-4xl mb-2" ] [ text "Combined" ] -- Increase text size
                 , labeledValue "Yearly Salary:" model.combinedYearlySalary
                 , labeledValue "Post Retirement Yearly Salary:" model.combinedPostRetirementYearlySalary
                 , labeledValue "Monthly Salary:" model.combinedMonthlySalary
@@ -394,7 +394,7 @@ view model =
                 [ Attr.class "flex flex-col sm:flex-row justify-between w-full gap-6" ]
                 [ div
                     [ Attr.class "flex-1 mr-2" ]
-                    [ h3 [ Attr.class "text-xl sm:text-2xl text-center" ] [ text "Sarah" ]
+                    [ h3 [ Attr.class "text-2xl sm:text-3xl text-center" ] [ text "Sarah" ] -- Increase text size
                     , labeledValue "Post Retirement Yearly Salary:" model.sarah.postRetirementYearlySalary
                     , labeledValue "Monthly Salary:" model.sarah.monthlySalary
                     , labeledValue "Post Retirement Monthly Salary:" model.sarah.postRetirementMonthlySalary
@@ -402,7 +402,7 @@ view model =
                     ]
                 , div
                     [ Attr.class "flex-1" ]
-                    [ h3 [ Attr.class "text-xl sm:text-2xl text-center" ] [ text "Kyle" ]
+                    [ h3 [ Attr.class "text-2xl sm:text-3xl text-center" ] [ text "Kyle" ] -- Increase text size
                     , labeledValue "Post Retirement Yearly Salary:" model.kyle.postRetirementYearlySalary
                     , labeledValue "Monthly Salary:" model.kyle.monthlySalary
                     , labeledValue "Post Retirement Monthly Salary:" model.kyle.postRetirementMonthlySalary

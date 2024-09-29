@@ -712,6 +712,11 @@ video {
   line-height: 2rem;
 }
 
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .text-gray-100 {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
@@ -732,6 +737,10 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:w-3\/4 {
+    width: 75%;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -753,6 +762,17 @@ video {
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .sm\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:w-2\/3 {
+    width: 66.666667%;
   }
 }
 

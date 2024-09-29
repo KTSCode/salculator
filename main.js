@@ -5615,7 +5615,7 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$form,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('flex flex-col items-center w-full xl:w-1/2 max-w-lg mb-5 p-4 gap-2 mx-auto')
+						$elm$html$Html$Attributes$class('flex flex-col items-center w-full sm:w-3/4 md:w-2/3 xl:w-1/2 mb-5 p-4 gap-2 mx-auto')
 					]),
 				_List_fromArray(
 					[
@@ -5623,7 +5623,7 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$h2,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('text-3xl sm:text-4xl mb-4')
+								$elm$html$Html$Attributes$class('text-4xl sm:text-5xl mb-4')
 							]),
 						_List_fromArray(
 							[
@@ -5644,7 +5644,7 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('flex flex-col items-center w-full xl:w-1/2 max-w-lg pt-5 text-center gap-4 mx-auto')
+						$elm$html$Html$Attributes$class('flex flex-col items-center w-full sm:w-3/4 md:w-2/3 xl:w-1/2 pt-5 text-center gap-4 mx-auto')
 					]),
 				_List_fromArray(
 					[
@@ -5652,7 +5652,7 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$h2,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('text-3xl sm:text-4xl mb-4')
+								$elm$html$Html$Attributes$class('text-4xl sm:text-5xl mb-4')
 							]),
 						_List_fromArray(
 							[
@@ -5672,7 +5672,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$h3,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('text-2xl sm:text-3xl mb-2')
+										$elm$html$Html$Attributes$class('text-3xl sm:text-4xl mb-2')
 									]),
 								_List_fromArray(
 									[
@@ -5703,7 +5703,7 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$h3,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('text-xl sm:text-2xl text-center')
+												$elm$html$Html$Attributes$class('text-2xl sm:text-3xl text-center')
 											]),
 										_List_fromArray(
 											[
@@ -5726,7 +5726,7 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$h3,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('text-xl sm:text-2xl text-center')
+												$elm$html$Html$Attributes$class('text-2xl sm:text-3xl text-center')
 											]),
 										_List_fromArray(
 											[
