@@ -52,23 +52,23 @@ init =
     , sarahCont = "10"
     , kyleSalary = ""
     , kyleCont = "10"
-    , monthlyTithe = ""
-    , monthlyTitheAndGiving = ""
-    , combinedYearlySalary = ""
-    , combinedPostRetirementYearlySalary = ""
-    , combinedMonthlySalary = ""
-    , combinedPostRetirementMonthlySalary = ""
+    , monthlyTithe = "$0"
+    , monthlyTitheAndGiving = "$0"
+    , combinedYearlySalary = "$0"
+    , combinedPostRetirementYearlySalary = "$0"
+    , combinedMonthlySalary = "$0"
+    , combinedPostRetirementMonthlySalary = "$0"
     , sarah =
-        { postRetirementYearlySalary = ""
-        , monthlySalary = ""
-        , postRetirementMonthlySalary = ""
-        , hourlySalary = ""
+        { postRetirementYearlySalary = "$0"
+        , monthlySalary = "$0"
+        , postRetirementMonthlySalary = "$0"
+        , hourlySalary = "$0"
         }
     , kyle =
-        { postRetirementYearlySalary = ""
-        , monthlySalary = ""
-        , postRetirementMonthlySalary = ""
-        , hourlySalary = ""
+        { postRetirementYearlySalary = "$0"
+        , monthlySalary = "$0"
+        , postRetirementMonthlySalary = "$0"
+        , hourlySalary = "$0"
         }
     }
 
