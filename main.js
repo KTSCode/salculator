@@ -5604,13 +5604,17 @@ var $author$project$Main$view = function (model) {
 				A2($elm$html$Html$Attributes$style, 'display', 'flex'),
 				A2($elm$html$Html$Attributes$style, 'flex-direction', 'row'),
 				A2($elm$html$Html$Attributes$style, 'justify-content', 'space-around'),
-				A2($elm$html$Html$Attributes$style, 'align-items', 'top'),
+				A2($elm$html$Html$Attributes$style, 'align-items', 'flex-start'),
 				A2($elm$html$Html$Attributes$style, 'height', '100vh'),
 				A2($elm$html$Html$Attributes$style, 'margin', '0'),
 				A2($elm$html$Html$Attributes$style, 'font-family', 'Roboto, sans-serif'),
-				A2($elm$html$Html$Attributes$style, 'backgroundColor', '#1E272E'),
+				A2($elm$html$Html$Attributes$style, 'background-color', '#1E272E'),
 				A2($elm$html$Html$Attributes$style, 'color', '#ECF0F1'),
-				A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
+				A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap'),
+				A2($elm$html$Html$Attributes$style, 'padding', '20px'),
+				A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
+				A2($elm$html$Html$Attributes$style, 'width', '100%'),
+				A2($elm$html$Html$Attributes$style, 'gap', '10px')
 			]),
 		_List_fromArray(
 			[
@@ -5623,7 +5627,9 @@ var $author$project$Main$view = function (model) {
 						A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
 						A2($elm$html$Html$Attributes$style, 'width', '100%'),
 						A2($elm$html$Html$Attributes$style, 'max-width', '600px'),
-						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
+						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
+						A2($elm$html$Html$Attributes$style, 'margin-bottom', '20px'),
+						A2($elm$html$Html$Attributes$style, 'flex-grow', '1')
 					]),
 				_List_fromArray(
 					[
@@ -5685,8 +5691,8 @@ var $author$project$Main$view = function (model) {
 						A2($elm$html$Html$Attributes$style, 'width', '100%'),
 						A2($elm$html$Html$Attributes$style, 'max-width', '600px'),
 						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
-						A2($elm$html$Html$Attributes$style, 'margin-top', '20px'),
-						A2($elm$html$Html$Attributes$style, 'padding-top', '20px')
+						A2($elm$html$Html$Attributes$style, 'padding-top', '20px'),
+						A2($elm$html$Html$Attributes$style, 'flex-grow', '1')
 					]),
 				_List_fromArray(
 					[
@@ -5699,10 +5705,10 @@ var $author$project$Main$view = function (model) {
 							])),
 						A2($author$project$Main$labeledValue, 'Monthly Tithe:', model.a$),
 						A2($author$project$Main$labeledValue, 'Monthly Tithe + Giving:', model.a0),
-						A2($author$project$Main$labeledValue, 'Combinged Yearly Salary:', model.aW),
-						A2($author$project$Main$labeledValue, 'Combinged Post Retirement Yearly Salary:', model.aV),
-						A2($author$project$Main$labeledValue, 'Combinged Monthly Salary:', model.aT),
-						A2($author$project$Main$labeledValue, 'Combinged Post Retirement Monthly Salary:', model.aU),
+						A2($author$project$Main$labeledValue, 'Combined Yearly Salary:', model.aW),
+						A2($author$project$Main$labeledValue, 'Combined Post Retirement Yearly Salary:', model.aV),
+						A2($author$project$Main$labeledValue, 'Combined Monthly Salary:', model.aT),
+						A2($author$project$Main$labeledValue, 'Combined Post Retirement Monthly Salary:', model.aU),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(

@@ -364,13 +364,17 @@ view model =
         , Attr.style "display" "flex"
         , Attr.style "flex-direction" "row"
         , Attr.style "justify-content" "space-around"
-        , Attr.style "align-items" "top"
+        , Attr.style "align-items" "flex-start"
         , Attr.style "height" "100vh"
         , Attr.style "margin" "0"
         , Attr.style "font-family" "Roboto, sans-serif"
-        , Attr.style "backgroundColor" "#1E272E"
+        , Attr.style "background-color" "#1E272E"
         , Attr.style "color" "#ECF0F1"
         , Attr.style "flex-wrap" "wrap"
+        , Attr.style "padding" "20px"
+        , Attr.style "box-sizing" "border-box"
+        , Attr.style "width" "100%"
+        , Attr.style "gap" "10px"
         ]
         [ Html.form
             [ Attr.style "display" "flex"
@@ -379,6 +383,8 @@ view model =
             , Attr.style "width" "100%"
             , Attr.style "max-width" "600px"
             , Attr.style "box-sizing" "border-box"
+            , Attr.style "margin-bottom" "20px"
+            , Attr.style "flex-grow" "1"
             ]
             [ h2 [] [ text "Input Data:" ]
             , label [] [ text "Number of Years Married" ]
@@ -399,16 +405,16 @@ view model =
             , Attr.style "width" "100%"
             , Attr.style "max-width" "600px"
             , Attr.style "box-sizing" "border-box"
-            , Attr.style "margin-top" "20px"
             , Attr.style "padding-top" "20px"
+            , Attr.style "flex-grow" "1"
             ]
             [ h2 [] [ text "Output Data:" ]
             , labeledValue "Monthly Tithe:" model.monthlyTithe
             , labeledValue "Monthly Tithe + Giving:" model.monthlyTitheAndGiving
-            , labeledValue "Combinged Yearly Salary:" model.combinedYearlySalary
-            , labeledValue "Combinged Post Retirement Yearly Salary:" model.combinedPostRetirementYearlySalary
-            , labeledValue "Combinged Monthly Salary:" model.combinedMonthlySalary
-            , labeledValue "Combinged Post Retirement Monthly Salary:" model.combinedPostRetirementMonthlySalary
+            , labeledValue "Combined Yearly Salary:" model.combinedYearlySalary
+            , labeledValue "Combined Post Retirement Yearly Salary:" model.combinedPostRetirementYearlySalary
+            , labeledValue "Combined Monthly Salary:" model.combinedMonthlySalary
+            , labeledValue "Combined Post Retirement Monthly Salary:" model.combinedPostRetirementMonthlySalary
             , div
                 [ Attr.style "display" "flex"
                 , Attr.style "flex-direction" "row"
