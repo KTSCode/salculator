@@ -20,12 +20,28 @@ main =
 -- MODEL
 
 
+type alias PersonValues =
+    { postRetirementYearlySalary : String
+    , monthlySalary : String
+    , postRetirementMonthlySalary : String
+    , hourlySalary : String
+    }
+
+
 type alias Model =
     { yearsMarried : String
     , sarahSalary : String
     , sarahCont : String
     , kyleSalary : String
     , kyleCont : String
+    , monthlyTithe : String
+    , monthlyTitheAndGiving : String
+    , combinedYearlySalary : String
+    , combinedPostRetirementYearlySalary : String
+    , combinedMonthlySalary : String
+    , combinedPostRetirementMonthlySalary : String
+    , sarah : PersonValues
+    , kyle : PersonValues
     }
 
 
@@ -36,6 +52,24 @@ init =
     , sarahCont = "10"
     , kyleSalary = ""
     , kyleCont = "10"
+    , monthlyTithe = ""
+    , monthlyTitheAndGiving = ""
+    , combinedYearlySalary = ""
+    , combinedPostRetirementYearlySalary = ""
+    , combinedMonthlySalary = ""
+    , combinedPostRetirementMonthlySalary = ""
+    , sarah =
+        { postRetirementYearlySalary = ""
+        , monthlySalary = ""
+        , postRetirementMonthlySalary = ""
+        , hourlySalary = ""
+        }
+    , kyle =
+        { postRetirementYearlySalary = ""
+        , monthlySalary = ""
+        , postRetirementMonthlySalary = ""
+        , hourlySalary = ""
+        }
     }
 
 
@@ -53,25 +87,106 @@ type Msg
 
 update : Msg -> Model -> Model
 update msg model =
-    case msg of
-        ChangeYearsMarried val ->
-            { model | yearsMarried = filterInput val }
+    let
+        updatedModel =
+            case msg of
+                ChangeYearsMarried val ->
+                    { model | yearsMarried = filterInput val }
 
-        ChangeSarahSalary val ->
-            { model | sarahSalary = filterInput val }
+                ChangeSarahSalary val ->
+                    { model | sarahSalary = filterInput val }
 
-        ChangeSarahCont val ->
-            { model | sarahCont = filterInput val }
+                ChangeSarahCont val ->
+                    { model | sarahCont = filterInput val }
 
-        ChangeKyleSalary val ->
-            { model | kyleSalary = filterInput val }
+                ChangeKyleSalary val ->
+                    { model | kyleSalary = filterInput val }
 
-        ChangeKyleCont val ->
-            { model | kyleCont = filterInput val }
+                ChangeKyleCont val ->
+                    { model | kyleCont = filterInput val }
+    in
+    { updatedModel
+        | monthlyTithe =
+            formatCurrency
+                (calculateTithe "0"
+                    updatedModel.sarahSalary
+                    updatedModel.sarahCont
+                    updatedModel.kyleSalary
+                    updatedModel.kyleCont
+                )
+        , monthlyTitheAndGiving =
+            formatCurrency
+                (calculateTithe updatedModel.yearsMarried
+                    updatedModel.sarahSalary
+                    updatedModel.sarahCont
+                    updatedModel.kyleSalary
+                    updatedModel.kyleCont
+                )
+        , combinedYearlySalary =
+            formatCurrency
+                (toFloatDef updatedModel.sarahSalary
+                    + toFloatDef updatedModel.kyleSalary
+                )
+        , combinedPostRetirementYearlySalary =
+            formatCurrency
+                (combinedPostRetirement
+                    (toFloatDef updatedModel.kyleSalary)
+                    (toFloatDef updatedModel.kyleCont)
+                    (toFloatDef updatedModel.sarahSalary)
+                    (toFloatDef updatedModel.sarahCont)
+                )
+        , combinedMonthlySalary =
+            formatCurrency
+                (monthly (toFloatDef updatedModel.sarahSalary)
+                    + monthly (toFloatDef updatedModel.kyleSalary)
+                )
+        , combinedPostRetirementMonthlySalary =
+            formatCurrency
+                (monthlyCombinedPostRetirement
+                    (toFloatDef updatedModel.kyleSalary)
+                    (toFloatDef updatedModel.kyleCont)
+                    (toFloatDef updatedModel.sarahSalary)
+                    (toFloatDef updatedModel.sarahCont)
+                )
+        , sarah =
+            { postRetirementYearlySalary =
+                formatCurrency
+                    (calculatePostRetirement updatedModel.sarahSalary updatedModel.sarahCont)
+            , monthlySalary =
+                formatCurrency
+                    (salaryToMonthly updatedModel.sarahSalary)
+            , postRetirementMonthlySalary =
+                formatCurrency
+                    (calculatePostRetirement
+                        (floatToString (salaryToMonthly updatedModel.sarahSalary))
+                        updatedModel.sarahCont
+                    )
+            , hourlySalary =
+                formatCurrency
+                    (salaryToHourly updatedModel.sarahSalary)
+            }
+        , kyle =
+            { postRetirementYearlySalary =
+                formatCurrency
+                    (calculatePostRetirement updatedModel.kyleSalary updatedModel.kyleCont)
+            , monthlySalary =
+                formatCurrency
+                    (salaryToMonthly updatedModel.kyleSalary)
+            , postRetirementMonthlySalary =
+                formatCurrency
+                    (calculatePostRetirement
+                        (floatToString (salaryToMonthly updatedModel.kyleSalary))
+                        updatedModel.kyleCont
+                    )
+            , hourlySalary =
+                formatCurrency
+                    (salaryToHourly updatedModel.kyleSalary)
+            }
+    }
 
 
 
--- VIEW
+-- Update Functions
 
 
 toFloatDef : String -> Float
@@ -203,6 +318,7 @@ stringSum str1 str2 =
 
 
 
+-- VIEW
 --HTML functions
 
 
@@ -235,6 +351,10 @@ formInput ph val oi =
         , br [] []
         , br [] []
         ]
+
+
+
+-- VIEW
 
 
 view : Model -> Html Msg
@@ -283,12 +403,12 @@ view model =
             , Attr.style "padding-top" "20px"
             ]
             [ h2 [] [ text "Output Data:" ]
-            , labeledValue "Monthly Tithe:" (formatCurrency (calculateTithe "0" model.sarahSalary model.sarahCont model.kyleSalary model.kyleCont))
-            , labeledValue "Monthly Tithe + Giving:" (formatCurrency (calculateTithe model.yearsMarried model.sarahSalary model.sarahCont model.kyleSalary model.kyleCont))
-            , labeledValue "Combinged Yearly Salary:" (formatCurrency (toFloatDef model.sarahSalary + toFloatDef model.kyleSalary))
-            , labeledValue "Combinged Post Retirement Yearly Salary:" (formatCurrency (combinedPostRetirement (toFloatDef model.kyleSalary) (toFloatDef model.kyleCont) (toFloatDef model.sarahSalary) (toFloatDef model.sarahCont)))
-            , labeledValue "Combinged Monthly Salary:" (formatCurrency (monthly (toFloatDef model.sarahSalary) + toFloatDef model.kyleSalary))
-            , labeledValue "Combinged Post Retirement Monthly Salary:" (formatCurrency (monthlyCombinedPostRetirement (toFloatDef model.kyleSalary) (toFloatDef model.kyleCont) (toFloatDef model.sarahSalary) (toFloatDef model.sarahCont)))
+            , labeledValue "Monthly Tithe:" model.monthlyTithe
+            , labeledValue "Monthly Tithe + Giving:" model.monthlyTitheAndGiving
+            , labeledValue "Combinged Yearly Salary:" model.combinedYearlySalary
+            , labeledValue "Combinged Post Retirement Yearly Salary:" model.combinedPostRetirementYearlySalary
+            , labeledValue "Combinged Monthly Salary:" model.combinedMonthlySalary
+            , labeledValue "Combinged Post Retirement Monthly Salary:" model.combinedPostRetirementMonthlySalary
             , div
                 [ Attr.style "display" "flex"
                 , Attr.style "flex-direction" "row"
@@ -300,19 +420,19 @@ view model =
                     , Attr.style "margin-right" "10px"
                     ]
                     [ h3 [ Attr.style "text-align" "center" ] [ text "Sarah" ]
-                    , labeledValue "Post Retirement Yearly Salary:" (formatCurrency (calculatePostRetirement model.sarahSalary model.sarahCont))
-                    , labeledValue "Monthly Salary:" (formatCurrency (salaryToMonthly model.sarahSalary))
-                    , labeledValue "Post Retirement Monthly Salary:" (formatCurrency (calculatePostRetirement (floatToString (salaryToMonthly model.sarahSalary)) model.sarahCont))
-                    , labeledValue "Hourly Salary:" (formatCurrency (salaryToHourly model.sarahSalary))
+                    , labeledValue "Post Retirement Yearly Salary:" model.sarah.postRetirementYearlySalary
+                    , labeledValue "Monthly Salary:" model.sarah.monthlySalary
+                    , labeledValue "Post Retirement Monthly Salary:" model.sarah.postRetirementMonthlySalary
+                    , labeledValue "Hourly Salary:" model.sarah.hourlySalary
                     ]
                 , div
                     [ Attr.style "flex" "1"
                     ]
                     [ h3 [ Attr.style "text-align" "center" ] [ text "Kyle" ]
-                    , labeledValue "Post Retirement Yearly Salary:" (formatCurrency (calculatePostRetirement model.kyleSalary model.kyleCont))
-                    , labeledValue "Monthly Salary:" (formatCurrency (salaryToMonthly model.kyleSalary))
-                    , labeledValue "Post Retirement Monthly Salary:" (formatCurrency (calculatePostRetirement (floatToString (salaryToMonthly model.kyleSalary)) model.kyleCont))
-                    , labeledValue "Hourly Salary:" (formatCurrency (salaryToHourly model.kyleSalary))
+                    , labeledValue "Post Retirement Yearly Salary:" model.kyle.postRetirementYearlySalary
+                    , labeledValue "Monthly Salary:" model.kyle.monthlySalary
+                    , labeledValue "Post Retirement Monthly Salary:" model.kyle.postRetirementMonthlySalary
+                    , labeledValue "Hourly Salary:" model.kyle.hourlySalary
                     ]
                 ]
             ]
