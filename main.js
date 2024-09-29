@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.a9.aA === region.br.aA)
+	if (region.bl.aG === region.bD.aG)
 	{
-		return 'on line ' + region.a9.aA;
+		return 'on line ' + region.bl.aG;
 	}
-	return 'on lines ' + region.a9.aA + ' through ' + region.br.aA;
+	return 'on lines ' + region.bl.aG + ' through ' + region.bD.aG;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ce,
-		impl.cr,
-		impl.cp,
+		impl.cq,
+		impl.cD,
+		impl.cB,
 		function() { return function() {} }
 	);
 });
@@ -2720,8 +2720,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		J: func(record.J),
-		ba: record.ba,
-		a7: record.a7
+		bm: record.bm,
+		bj: record.bj
 	}
 });
 
@@ -2990,10 +2990,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.J;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.ba;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.bm;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.a7) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.bj) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3943,11 +3943,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ce,
-		impl.cr,
-		impl.cp,
+		impl.cq,
+		impl.cD,
+		impl.cB,
 		function(sendToApp, initialModel) {
-			var view = impl.ct;
+			var view = impl.cF;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3979,12 +3979,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ce,
-		impl.cr,
-		impl.cp,
+		impl.cq,
+		impl.cD,
+		impl.cB,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.a8 && impl.a8(sendToApp)
-			var view = impl.ct;
+			var divertHrefToApp = impl.bk && impl.bk(sendToApp)
+			var view = impl.cF;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3992,12 +3992,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.b4);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.cg);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.cq) && (_VirtualDom_doc.title = title = doc.cq);
+				(title !== doc.cC) && (_VirtualDom_doc.title = title = doc.cC);
 			});
 		}
 	);
@@ -4053,12 +4053,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.ci;
-	var onUrlRequest = impl.cj;
+	var onUrlChange = impl.cu;
+	var onUrlRequest = impl.cv;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		a8: function(sendToApp)
+		bk: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4074,9 +4074,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.bL === next.bL
-							&& curr.bx === next.bx
-							&& curr.bI.a === next.bI.a
+							&& curr.bX === next.bX
+							&& curr.bJ === next.bJ
+							&& curr.bU.a === next.bU.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4084,13 +4084,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		ce: function(flags)
+		cq: function(flags)
 		{
-			return A3(impl.ce, flags, _Browser_getUrl(), key);
+			return A3(impl.cq, flags, _Browser_getUrl(), key);
 		},
-		ct: impl.ct,
-		cr: impl.cr,
-		cp: impl.cp
+		cF: impl.cF,
+		cD: impl.cD,
+		cB: impl.cB
 	});
 }
 
@@ -4156,17 +4156,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { cb: 'hidden', b5: 'visibilitychange' }
+		? { cn: 'hidden', ch: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { cb: 'mozHidden', b5: 'mozvisibilitychange' }
+		? { cn: 'mozHidden', ch: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { cb: 'msHidden', b5: 'msvisibilitychange' }
+		? { cn: 'msHidden', ch: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { cb: 'webkitHidden', b5: 'webkitvisibilitychange' }
-		: { cb: 'hidden', b5: 'visibilitychange' };
+		? { cn: 'webkitHidden', ch: 'webkitvisibilitychange' }
+		: { cn: 'hidden', ch: 'visibilitychange' };
 }
 
 
@@ -4247,12 +4247,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		bQ: _Browser_getScene(),
-		bX: {
-			bZ: _Browser_window.pageXOffset,
-			b_: _Browser_window.pageYOffset,
-			bY: _Browser_doc.documentElement.clientWidth,
-			bw: _Browser_doc.documentElement.clientHeight
+		b0: _Browser_getScene(),
+		b7: {
+			b9: _Browser_window.pageXOffset,
+			ca: _Browser_window.pageYOffset,
+			b8: _Browser_doc.documentElement.clientWidth,
+			bI: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4262,8 +4262,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		bY: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		bw: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		b8: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		bI: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4286,15 +4286,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			bQ: {
-				bY: node.scrollWidth,
-				bw: node.scrollHeight
+			b0: {
+				b8: node.scrollWidth,
+				bI: node.scrollHeight
 			},
-			bX: {
-				bZ: node.scrollLeft,
-				b_: node.scrollTop,
-				bY: node.clientWidth,
-				bw: node.clientHeight
+			b7: {
+				b9: node.scrollLeft,
+				ca: node.scrollTop,
+				b8: node.clientWidth,
+				bI: node.clientHeight
 			}
 		};
 	});
@@ -4324,18 +4324,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			bQ: _Browser_getScene(),
-			bX: {
-				bZ: x,
-				b_: y,
-				bY: _Browser_doc.documentElement.clientWidth,
-				bw: _Browser_doc.documentElement.clientHeight
+			b0: _Browser_getScene(),
+			b7: {
+				b9: x,
+				ca: y,
+				b8: _Browser_doc.documentElement.clientWidth,
+				bI: _Browser_doc.documentElement.clientHeight
 			},
-			b9: {
-				bZ: x + rect.left,
-				b_: y + rect.top,
-				bY: rect.width,
-				bw: rect.height
+			cl: {
+				b9: x + rect.left,
+				ca: y + rect.top,
+				b8: rect.width,
+				bI: rect.height
 			}
 		};
 	});
@@ -4407,7 +4407,21 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
-var $author$project$Main$init = {u: '10', l: '', y: '10', m: '', aK: '7'};
+var $author$project$Main$init = {
+	aT: '$0',
+	aU: '$0',
+	aV: '$0',
+	aW: '$0',
+	R: {Q: '$0', U: '$0', W: '$0', X: '$0'},
+	u: '10',
+	l: '',
+	a$: '$0',
+	a0: '$0',
+	Z: {Q: '$0', U: '$0', W: '$0', X: '$0'},
+	y: '10',
+	m: '',
+	aQ: '7'
+};
 var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
@@ -4912,7 +4926,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {bv: fragment, bx: host, bG: path, bI: port_, bL: protocol, bM: query};
+		return {bH: fragment, bJ: host, bS: path, bU: port_, bX: protocol, bY: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5197,100 +5211,20 @@ var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $elm$browser$Browser$sandbox = function (impl) {
 	return _Browser_element(
 		{
-			ce: function (_v0) {
-				return _Utils_Tuple2(impl.ce, $elm$core$Platform$Cmd$none);
+			cq: function (_v0) {
+				return _Utils_Tuple2(impl.cq, $elm$core$Platform$Cmd$none);
 			},
-			cp: function (_v1) {
+			cB: function (_v1) {
 				return $elm$core$Platform$Sub$none;
 			},
-			cr: F2(
+			cD: F2(
 				function (msg, model) {
 					return _Utils_Tuple2(
-						A2(impl.cr, msg, model),
+						A2(impl.cD, msg, model),
 						$elm$core$Platform$Cmd$none);
 				}),
-			ct: impl.ct
+			cF: impl.cF
 		});
-};
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
-var $elm$core$String$fromList = _String_fromList;
-var $elm$core$String$foldr = _String_foldr;
-var $elm$core$String$toList = function (string) {
-	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
-};
-var $author$project$Main$filterInput = function (str) {
-	return $elm$core$String$fromList(
-		A2(
-			$elm$core$List$filter,
-			function (c) {
-				return $elm$core$Char$isDigit(c) || (c === '.');
-			},
-			$elm$core$String$toList(str)));
-};
-var $author$project$Main$update = F2(
-	function (msg, model) {
-		switch (msg.$) {
-			case 0:
-				var val = msg.a;
-				return _Utils_update(
-					model,
-					{
-						aK: $author$project$Main$filterInput(val)
-					});
-			case 1:
-				var val = msg.a;
-				return _Utils_update(
-					model,
-					{
-						m: $author$project$Main$filterInput(val)
-					});
-			case 2:
-				var val = msg.a;
-				return _Utils_update(
-					model,
-					{
-						y: $author$project$Main$filterInput(val)
-					});
-			case 3:
-				var val = msg.a;
-				return _Utils_update(
-					model,
-					{
-						l: $author$project$Main$filterInput(val)
-					});
-			default:
-				var val = msg.a;
-				return _Utils_update(
-					model,
-					{
-						u: $author$project$Main$filterInput(val)
-					});
-		}
-	});
-var $author$project$Main$ChangeKyleCont = function (a) {
-	return {$: 4, a: a};
-};
-var $author$project$Main$ChangeKyleSalary = function (a) {
-	return {$: 3, a: a};
-};
-var $author$project$Main$ChangeSarahCont = function (a) {
-	return {$: 2, a: a};
-};
-var $author$project$Main$ChangeSarahSalary = function (a) {
-	return {$: 1, a: a};
-};
-var $author$project$Main$ChangeYearsMarried = function (a) {
-	return {$: 0, a: a};
 };
 var $author$project$Main$reduceByPercent = F2(
 	function (toReduce, percent) {
@@ -5333,11 +5267,222 @@ var $author$project$Main$combinedPostRetirement = F4(
 	function (sal1, cont1, sal2, cont2) {
 		return A2($author$project$Main$reduceByPercent, sal1, cont1) + A2($author$project$Main$reduceByPercent, sal2, cont2);
 	});
-var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$core$String$fromList = _String_fromList;
+var $elm$core$String$foldr = _String_foldr;
+var $elm$core$String$toList = function (string) {
+	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
+};
+var $author$project$Main$filterInput = function (str) {
+	return $elm$core$String$fromList(
+		A2(
+			$elm$core$List$filter,
+			function (c) {
+				return $elm$core$Char$isDigit(c) || (c === '.');
+			},
+			$elm$core$String$toList(str)));
+};
 var $elm$core$String$fromFloat = _String_fromNumber;
 var $author$project$Main$floatToString = function (number) {
 	return $elm$core$String$fromFloat(number);
 };
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$core$Basics$abs = function (n) {
+	return (n < 0) ? (-n) : n;
+};
+var $elm$core$String$cons = _String_cons;
+var $elm$core$String$fromChar = function (_char) {
+	return A2($elm$core$String$cons, _char, '');
+};
+var $elm$core$Bitwise$and = _Bitwise_and;
+var $elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
+var $elm$core$String$repeatHelp = F3(
+	function (n, chunk, result) {
+		return (n <= 0) ? result : A3(
+			$elm$core$String$repeatHelp,
+			n >> 1,
+			_Utils_ap(chunk, chunk),
+			(!(n & 1)) ? result : _Utils_ap(result, chunk));
+	});
+var $elm$core$String$repeat = F2(
+	function (n, chunk) {
+		return A3($elm$core$String$repeatHelp, n, chunk, '');
+	});
+var $elm$core$String$padLeft = F3(
+	function (n, _char, string) {
+		return _Utils_ap(
+			A2(
+				$elm$core$String$repeat,
+				n - $elm$core$String$length(string),
+				$elm$core$String$fromChar(_char)),
+			string);
+	});
+var $elm$core$Basics$round = _Basics_round;
+var $author$project$Main$formatCurrency = function (amount) {
+	return function (str) {
+		return (amount < 0) ? ('-' + str) : str;
+	}(
+		A3(
+			$elm$core$String$padLeft,
+			2,
+			'0',
+			function (str) {
+				return '$' + str;
+			}(
+				$elm$core$String$fromFloat(
+					function (x) {
+						return x / 100;
+					}(
+						$elm$core$Basics$round(
+							100 * $elm$core$Basics$abs(amount)))))));
+};
+var $author$project$Main$monthly = function (salary) {
+	return salary / 12;
+};
+var $author$project$Main$monthlyPostRetirement = F2(
+	function (salary, contribution) {
+		return A2(
+			$author$project$Main$reduceByPercent,
+			$author$project$Main$monthly(salary),
+			contribution);
+	});
+var $author$project$Main$monthlyCombinedPostRetirement = F4(
+	function (sal1, cont1, sal2, cont2) {
+		return A2($author$project$Main$monthlyPostRetirement, sal1, cont1) + A2($author$project$Main$monthlyPostRetirement, sal2, cont2);
+	});
+var $author$project$Main$salaryToHourly = function (str) {
+	return $author$project$Main$toFloatDef(str) / 2080;
+};
+var $author$project$Main$salaryToMonthly = function (str) {
+	return $author$project$Main$monthly(
+		$author$project$Main$toFloatDef(str));
+};
+var $author$project$Main$update = F2(
+	function (msg, model) {
+		var updatedModel = function () {
+			switch (msg.$) {
+				case 0:
+					var val = msg.a;
+					return _Utils_update(
+						model,
+						{
+							aQ: $author$project$Main$filterInput(val)
+						});
+				case 1:
+					var val = msg.a;
+					return _Utils_update(
+						model,
+						{
+							m: $author$project$Main$filterInput(val)
+						});
+				case 2:
+					var val = msg.a;
+					return _Utils_update(
+						model,
+						{
+							y: $author$project$Main$filterInput(val)
+						});
+				case 3:
+					var val = msg.a;
+					return _Utils_update(
+						model,
+						{
+							l: $author$project$Main$filterInput(val)
+						});
+				default:
+					var val = msg.a;
+					return _Utils_update(
+						model,
+						{
+							u: $author$project$Main$filterInput(val)
+						});
+			}
+		}();
+		return _Utils_update(
+			updatedModel,
+			{
+				aT: $author$project$Main$formatCurrency(
+					$author$project$Main$monthly(
+						$author$project$Main$toFloatDef(updatedModel.m)) + $author$project$Main$monthly(
+						$author$project$Main$toFloatDef(updatedModel.l))),
+				aU: $author$project$Main$formatCurrency(
+					A4(
+						$author$project$Main$monthlyCombinedPostRetirement,
+						$author$project$Main$toFloatDef(updatedModel.l),
+						$author$project$Main$toFloatDef(updatedModel.u),
+						$author$project$Main$toFloatDef(updatedModel.m),
+						$author$project$Main$toFloatDef(updatedModel.y))),
+				aV: $author$project$Main$formatCurrency(
+					A4(
+						$author$project$Main$combinedPostRetirement,
+						$author$project$Main$toFloatDef(updatedModel.l),
+						$author$project$Main$toFloatDef(updatedModel.u),
+						$author$project$Main$toFloatDef(updatedModel.m),
+						$author$project$Main$toFloatDef(updatedModel.y))),
+				aW: $author$project$Main$formatCurrency(
+					$author$project$Main$toFloatDef(updatedModel.m) + $author$project$Main$toFloatDef(updatedModel.l)),
+				R: {
+					Q: $author$project$Main$formatCurrency(
+						$author$project$Main$salaryToHourly(updatedModel.l)),
+					U: $author$project$Main$formatCurrency(
+						$author$project$Main$salaryToMonthly(updatedModel.l)),
+					W: $author$project$Main$formatCurrency(
+						A2(
+							$author$project$Main$calculatePostRetirement,
+							$author$project$Main$floatToString(
+								$author$project$Main$salaryToMonthly(updatedModel.l)),
+							updatedModel.u)),
+					X: $author$project$Main$formatCurrency(
+						A2($author$project$Main$calculatePostRetirement, updatedModel.l, updatedModel.u))
+				},
+				a$: $author$project$Main$formatCurrency(
+					A5($author$project$Main$calculateTithe, '0', updatedModel.m, updatedModel.y, updatedModel.l, updatedModel.u)),
+				a0: $author$project$Main$formatCurrency(
+					A5($author$project$Main$calculateTithe, updatedModel.aQ, updatedModel.m, updatedModel.y, updatedModel.l, updatedModel.u)),
+				Z: {
+					Q: $author$project$Main$formatCurrency(
+						$author$project$Main$salaryToHourly(updatedModel.m)),
+					U: $author$project$Main$formatCurrency(
+						$author$project$Main$salaryToMonthly(updatedModel.m)),
+					W: $author$project$Main$formatCurrency(
+						A2(
+							$author$project$Main$calculatePostRetirement,
+							$author$project$Main$floatToString(
+								$author$project$Main$salaryToMonthly(updatedModel.m)),
+							updatedModel.y)),
+					X: $author$project$Main$formatCurrency(
+						A2($author$project$Main$calculatePostRetirement, updatedModel.m, updatedModel.y))
+				}
+			});
+	});
+var $author$project$Main$ChangeKyleCont = function (a) {
+	return {$: 4, a: a};
+};
+var $author$project$Main$ChangeKyleSalary = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Main$ChangeSarahCont = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Main$ChangeSarahSalary = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Main$ChangeYearsMarried = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$form = _VirtualDom_node('form');
 var $elm$html$Html$br = _VirtualDom_node('br');
 var $elm$html$Html$input = _VirtualDom_node('input');
@@ -5410,58 +5555,6 @@ var $author$project$Main$formInput = F3(
 					A2($elm$html$Html$br, _List_Nil, _List_Nil)
 				]));
 	});
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
-var $elm$core$Basics$abs = function (n) {
-	return (n < 0) ? (-n) : n;
-};
-var $elm$core$String$cons = _String_cons;
-var $elm$core$String$fromChar = function (_char) {
-	return A2($elm$core$String$cons, _char, '');
-};
-var $elm$core$Bitwise$and = _Bitwise_and;
-var $elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
-var $elm$core$String$repeatHelp = F3(
-	function (n, chunk, result) {
-		return (n <= 0) ? result : A3(
-			$elm$core$String$repeatHelp,
-			n >> 1,
-			_Utils_ap(chunk, chunk),
-			(!(n & 1)) ? result : _Utils_ap(result, chunk));
-	});
-var $elm$core$String$repeat = F2(
-	function (n, chunk) {
-		return A3($elm$core$String$repeatHelp, n, chunk, '');
-	});
-var $elm$core$String$padLeft = F3(
-	function (n, _char, string) {
-		return _Utils_ap(
-			A2(
-				$elm$core$String$repeat,
-				n - $elm$core$String$length(string),
-				$elm$core$String$fromChar(_char)),
-			string);
-	});
-var $elm$core$Basics$round = _Basics_round;
-var $author$project$Main$formatCurrency = function (amount) {
-	return function (str) {
-		return (amount < 0) ? ('-' + str) : str;
-	}(
-		A3(
-			$elm$core$String$padLeft,
-			2,
-			'0',
-			function (str) {
-				return '$' + str;
-			}(
-				$elm$core$String$fromFloat(
-					function (x) {
-						return x / 100;
-					}(
-						$elm$core$Basics$round(
-							100 * $elm$core$Basics$abs(amount)))))));
-};
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
@@ -5502,27 +5595,6 @@ var $author$project$Main$labeledValue = F2(
 					A2($elm$html$Html$br, _List_Nil, _List_Nil)
 				]));
 	});
-var $author$project$Main$monthly = function (salary) {
-	return salary / 12;
-};
-var $author$project$Main$monthlyPostRetirement = F2(
-	function (salary, contribution) {
-		return A2(
-			$author$project$Main$reduceByPercent,
-			$author$project$Main$monthly(salary),
-			contribution);
-	});
-var $author$project$Main$monthlyCombinedPostRetirement = F4(
-	function (sal1, cont1, sal2, cont2) {
-		return A2($author$project$Main$monthlyPostRetirement, sal1, cont1) + A2($author$project$Main$monthlyPostRetirement, sal2, cont2);
-	});
-var $author$project$Main$salaryToHourly = function (str) {
-	return $author$project$Main$toFloatDef(str) / 2080;
-};
-var $author$project$Main$salaryToMonthly = function (str) {
-	return $author$project$Main$monthly(
-		$author$project$Main$toFloatDef(str));
-};
 var $author$project$Main$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -5569,7 +5641,7 @@ var $author$project$Main$view = function (model) {
 							[
 								$elm$html$Html$text('Number of Years Married')
 							])),
-						A3($author$project$Main$formInput, 'Years Married', model.aK, $author$project$Main$ChangeYearsMarried),
+						A3($author$project$Main$formInput, 'Years Married', model.aQ, $author$project$Main$ChangeYearsMarried),
 						A2(
 						$elm$html$Html$label,
 						_List_Nil,
@@ -5625,47 +5697,12 @@ var $author$project$Main$view = function (model) {
 							[
 								$elm$html$Html$text('Output Data:')
 							])),
-						A2(
-						$author$project$Main$labeledValue,
-						'Monthly Tithe:',
-						$author$project$Main$formatCurrency(
-							A5($author$project$Main$calculateTithe, '0', model.m, model.y, model.l, model.u))),
-						A2(
-						$author$project$Main$labeledValue,
-						'Monthly Tithe + Giving:',
-						$author$project$Main$formatCurrency(
-							A5($author$project$Main$calculateTithe, model.aK, model.m, model.y, model.l, model.u))),
-						A2(
-						$author$project$Main$labeledValue,
-						'Combinged Yearly Salary:',
-						$author$project$Main$formatCurrency(
-							$author$project$Main$toFloatDef(model.m) + $author$project$Main$toFloatDef(model.l))),
-						A2(
-						$author$project$Main$labeledValue,
-						'Combinged Post Retirement Yearly Salary:',
-						$author$project$Main$formatCurrency(
-							A4(
-								$author$project$Main$combinedPostRetirement,
-								$author$project$Main$toFloatDef(model.l),
-								$author$project$Main$toFloatDef(model.u),
-								$author$project$Main$toFloatDef(model.m),
-								$author$project$Main$toFloatDef(model.y)))),
-						A2(
-						$author$project$Main$labeledValue,
-						'Combinged Monthly Salary:',
-						$author$project$Main$formatCurrency(
-							$author$project$Main$monthly(
-								$author$project$Main$toFloatDef(model.m)) + $author$project$Main$toFloatDef(model.l))),
-						A2(
-						$author$project$Main$labeledValue,
-						'Combinged Post Retirement Monthly Salary:',
-						$author$project$Main$formatCurrency(
-							A4(
-								$author$project$Main$monthlyCombinedPostRetirement,
-								$author$project$Main$toFloatDef(model.l),
-								$author$project$Main$toFloatDef(model.u),
-								$author$project$Main$toFloatDef(model.m),
-								$author$project$Main$toFloatDef(model.y)))),
+						A2($author$project$Main$labeledValue, 'Monthly Tithe:', model.a$),
+						A2($author$project$Main$labeledValue, 'Monthly Tithe + Giving:', model.a0),
+						A2($author$project$Main$labeledValue, 'Combinged Yearly Salary:', model.aW),
+						A2($author$project$Main$labeledValue, 'Combinged Post Retirement Yearly Salary:', model.aV),
+						A2($author$project$Main$labeledValue, 'Combinged Monthly Salary:', model.aT),
+						A2($author$project$Main$labeledValue, 'Combinged Post Retirement Monthly Salary:', model.aU),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
@@ -5696,30 +5733,10 @@ var $author$project$Main$view = function (model) {
 											[
 												$elm$html$Html$text('Sarah')
 											])),
-										A2(
-										$author$project$Main$labeledValue,
-										'Post Retirement Yearly Salary:',
-										$author$project$Main$formatCurrency(
-											A2($author$project$Main$calculatePostRetirement, model.m, model.y))),
-										A2(
-										$author$project$Main$labeledValue,
-										'Monthly Salary:',
-										$author$project$Main$formatCurrency(
-											$author$project$Main$salaryToMonthly(model.m))),
-										A2(
-										$author$project$Main$labeledValue,
-										'Post Retirement Monthly Salary:',
-										$author$project$Main$formatCurrency(
-											A2(
-												$author$project$Main$calculatePostRetirement,
-												$author$project$Main$floatToString(
-													$author$project$Main$salaryToMonthly(model.m)),
-												model.y))),
-										A2(
-										$author$project$Main$labeledValue,
-										'Hourly Salary:',
-										$author$project$Main$formatCurrency(
-											$author$project$Main$salaryToHourly(model.m)))
+										A2($author$project$Main$labeledValue, 'Post Retirement Yearly Salary:', model.Z.X),
+										A2($author$project$Main$labeledValue, 'Monthly Salary:', model.Z.U),
+										A2($author$project$Main$labeledValue, 'Post Retirement Monthly Salary:', model.Z.W),
+										A2($author$project$Main$labeledValue, 'Hourly Salary:', model.Z.Q)
 									])),
 								A2(
 								$elm$html$Html$div,
@@ -5739,36 +5756,16 @@ var $author$project$Main$view = function (model) {
 											[
 												$elm$html$Html$text('Kyle')
 											])),
-										A2(
-										$author$project$Main$labeledValue,
-										'Post Retirement Yearly Salary:',
-										$author$project$Main$formatCurrency(
-											A2($author$project$Main$calculatePostRetirement, model.l, model.u))),
-										A2(
-										$author$project$Main$labeledValue,
-										'Monthly Salary:',
-										$author$project$Main$formatCurrency(
-											$author$project$Main$salaryToMonthly(model.l))),
-										A2(
-										$author$project$Main$labeledValue,
-										'Post Retirement Monthly Salary:',
-										$author$project$Main$formatCurrency(
-											A2(
-												$author$project$Main$calculatePostRetirement,
-												$author$project$Main$floatToString(
-													$author$project$Main$salaryToMonthly(model.l)),
-												model.u))),
-										A2(
-										$author$project$Main$labeledValue,
-										'Hourly Salary:',
-										$author$project$Main$formatCurrency(
-											$author$project$Main$salaryToHourly(model.l)))
+										A2($author$project$Main$labeledValue, 'Post Retirement Yearly Salary:', model.R.X),
+										A2($author$project$Main$labeledValue, 'Monthly Salary:', model.R.U),
+										A2($author$project$Main$labeledValue, 'Post Retirement Monthly Salary:', model.R.W),
+										A2($author$project$Main$labeledValue, 'Hourly Salary:', model.R.Q)
 									]))
 							]))
 					]))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$sandbox(
-	{ce: $author$project$Main$init, cr: $author$project$Main$update, ct: $author$project$Main$view});
+	{cq: $author$project$Main$init, cD: $author$project$Main$update, cF: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));

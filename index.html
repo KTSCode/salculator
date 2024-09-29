@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Salculator</title>
-    <style>
-      form {
-        "display: flex; flex-direction: column; align-items: center;" }
-      input {
-        margin: 5px;
-      }
-    </style>
-  </head>
-  <body>
-    <div
-      id="app"
-      style="
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Salculator</title>
+  <style>
+    form {
+      "display: flex; flex-direction: column; align-items: center;"
+    }
+
+    input {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" style="
         display: flex;
         justify-content: center;
         align-items: top;
@@ -22,12 +24,12 @@
         margin: 0;
         font-family: Roboto, sans-serif;
         background-color: #1e272e;
-      "
-    >
-      <script src="main.js"></script>
-      <script>
-        var app = Elm.Main.init({ node: document.getElementById("app") });
-      </script>
-    </div>
-  </body>
+      ">
+    <script src="main.js"></script>
+    <script>
+      var app = Elm.Main.init({node: document.getElementById("app")});
+    </script>
+  </div>
+</body>
+
 </html>
